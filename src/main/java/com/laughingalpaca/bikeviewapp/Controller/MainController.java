@@ -2,7 +2,7 @@ package com.laughingalpaca.bikeviewapp.Controller;
 
 import com.gluonhq.maps.MapPoint;
 import com.gluonhq.maps.MapView;
-import com.laughingalpaca.bikeviewapp.Model.StationMapLayer;
+import com.laughingalpaca.bikeviewapp.StationMapLayer;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -124,7 +124,7 @@ public class MainController implements Initializable {
         showResultsButton.setOnAction(e -> {
             System.out.println(
                     "Information Provided: " + "\n"
-                            + "Zipcode: " +zipCodeTextField.getText() + "\n"
+                            + "Zipcode: " + zipCodeTextField.getText() + "\n"
                             + "Borough: " + boroughChoiceBox.getValue() + "\n"
                             + "Station: " + stationChoiceBox.getValue() + "\n"
                             + "Min Bike Count: " + minBikeCountSlider.getValue()
@@ -134,24 +134,19 @@ public class MainController implements Initializable {
     }
 
     //TODO: Here we will handle initializing the choice box options, pass all possible boroughs and all possible stations
-    private void InitializeChoiceBoxes(){
+    private void InitializeChoiceBoxes() {
 
     }
 
     //TODO: Implement displaying a map using https://github.com/gluonhq/maps
     private void InitializeMapView(List<Object> stationsList) {
-
         MapView mapView = new MapView();
         MapPoint newYorkPoint = new MapPoint(40.776676, -73.971321);
-
         mapView.setCenter(newYorkPoint);
         mapView.setZoom(12);
-
         StationMapLayer stationMapLayer = new StationMapLayer();
         mapView.addLayer(stationMapLayer);
         mapPane.getChildren().add(mapView);
-
-
     }
 
 }

@@ -8,4 +8,5 @@ module com.laughingalpaca.bikeviewapp {
     opens com.laughingalpaca.bikeviewapp.Controller to javafx.fxml;
     exports com.laughingalpaca.bikeviewapp.View;
     opens com.laughingalpaca.bikeviewapp.View to javafx.fxml;
+    exports com.laughingalpaca.bikeviewapp;
 }
