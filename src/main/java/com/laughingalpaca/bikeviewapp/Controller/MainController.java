@@ -1,5 +1,8 @@
 package com.laughingalpaca.bikeviewapp.Controller;
 
+import com.gluonhq.maps.MapPoint;
+import com.gluonhq.maps.MapView;
+import com.laughingalpaca.bikeviewapp.Model.StationMapLayer;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -7,6 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -61,10 +65,12 @@ public class MainController implements Initializable {
     //TODO: Here we will handle initializing all data, event handling, etc
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        SetupEventHandlers();
+        InitializeEventHandlers();
+        InitializeChoiceBoxes();
+        InitializeMapView(new ArrayList<>());
     }
 
-    private void SetupEventHandlers() {
+    private void InitializeEventHandlers() {
 
         //Handle Checkbox Logic for ZIPCODE
         zipCodeCheckBox.setOnAction(event -> {
@@ -134,6 +140,16 @@ public class MainController implements Initializable {
 
     //TODO: Implement displaying a map using https://github.com/gluonhq/maps
     private void InitializeMapView(List<Object> stationsList) {
+
+        MapView mapView = new MapView();
+        MapPoint newYorkPoint = new MapPoint(40.776676, -73.971321);
+
+        mapView.setCenter(newYorkPoint);
+        mapView.setZoom(12);
+
+        StationMapLayer stationMapLayer = new StationMapLayer();
+        mapView.addLayer(stationMapLayer);
+        mapPane.getChildren().add(mapView);
 
 
     }
