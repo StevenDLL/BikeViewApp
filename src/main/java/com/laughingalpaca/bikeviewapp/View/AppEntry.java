@@ -19,6 +19,5 @@ public class AppEntry extends Application {
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNIFIED);
         stage.show();
-
     }
 }

@@ -1,6 +1,7 @@
 module com.laughingalpaca.bikeviewapp {
     requires javafx.controls;
     requires javafx.fxml;
+    requires com.gluonhq.maps;
 
     opens com.laughingalpaca.bikeviewapp to javafx.fxml;
     opens com.laughingalpaca.bikeviewapp.Controller to javafx.fxml;

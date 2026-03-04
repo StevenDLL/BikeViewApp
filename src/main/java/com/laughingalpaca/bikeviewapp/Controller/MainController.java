@@ -7,6 +7,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -57,8 +58,79 @@ public class MainController implements Initializable {
     public Button showResultsButton;
     public Button refreshDatabaseStatusButton;
 
+    //TODO: Here we will handle initializing all data, event handling, etc
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        SetupEventHandlers();
+    }
+
+    private void SetupEventHandlers() {
+
+        //Handle Checkbox Logic for ZIPCODE
+        zipCodeCheckBox.setOnAction(event -> {
+            if (zipCodeCheckBox.isSelected()) {
+                zipLabel.setDisable(false);
+                zipCodeTextField.setDisable(false);
+            } else {
+                zipLabel.setDisable(true);
+                zipCodeTextField.setDisable(true);
+                zipCodeTextField.clear();
+            }
+        });
+
+        //Handle Checkbox Logic for BOROUGH
+        boroughCheckBox.setOnAction(event -> {
+            if (boroughCheckBox.isSelected()) {
+                boroughLabel.setDisable(false);
+                boroughChoiceBox.setDisable(false);
+            } else {
+                boroughLabel.setDisable(true);
+                boroughChoiceBox.setDisable(true);
+                boroughChoiceBox.getSelectionModel().clearSelection();
+            }
+        });
+
+        //Handle Checkbox Logic for STATION
+        stationCheckBox.setOnAction(event -> {
+            if (stationCheckBox.isSelected()) {
+                stationLabel.setDisable(false);
+                stationChoiceBox.setDisable(false);
+            } else {
+                stationLabel.setDisable(true);
+                stationChoiceBox.setDisable(true);
+                stationChoiceBox.getSelectionModel().clearSelection();
+            }
+        });
+
+        //Handle Checkbox Logic for BIKE COUNT
+        bikeCountCheckBox.setOnAction(event -> {
+            if (bikeCountCheckBox.isSelected()) {
+                minBikeCountLabel.setDisable(false);
+                minBikeCountSlider.setDisable(false);
+            } else {
+                minBikeCountLabel.setDisable(true);
+                minBikeCountSlider.setDisable(true);
+                minBikeCountSlider.setValue(minBikeCountSlider.getMin());
+            }
+        });
+
+
+        showResultsButton.setOnAction(e -> {
+            System.out.println(
+                    "Information Provided: " + "\n"
+                            + "Zipcode: " +zipCodeTextField.getText() + "\n"
+                            + "Borough: " + boroughChoiceBox.getValue() + "\n"
+                            + "Station: " + stationChoiceBox.getValue() + "\n"
+                            + "Min Bike Count: " + minBikeCountSlider.getValue()
+
+            );
+        });
+    }
+
+    //TODO: Implement displaying a map using https://github.com/gluonhq/maps
+    private void InitializeMapView(List<Object> stationsList) {
+
 
     }
+
 }
