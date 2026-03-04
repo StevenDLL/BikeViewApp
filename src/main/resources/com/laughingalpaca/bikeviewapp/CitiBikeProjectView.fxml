@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane fx:id="mainTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laughingalpaca.bikeviewingapp.Controller.MainController">
+    <Tab fx:id="mapViewTab" text="MAP VIEW">
+        <AnchorPane fx:id="mapViewPane" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <Label fx:id="filterMapByLabel" layoutX="1123.0" layoutY="259.0" text="FILTER MAP BY:">
+                <font>
+                    <Font name="Arial Bold" size="16.0" />
+                </font>
+            </Label>
+            <Label fx:id="boroughLabel" disable="true" layoutX="1107.0" layoutY="458.0" text="Borough:">
+                <font>
+                    <Font name="Arial Bold" size="16.0" />
+                </font>
+            </Label>
+            <Button fx:id="showResultsButton" layoutX="1122.0" layoutY="634.0" mnemonicParsing="false" text="SHOW RESULTS" textAlignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="16.0" />
+                </font>
+            </Button>
+            <ChoiceBox fx:id="boroughChoiceBox" disable="true" layoutX="1107.0" layoutY="478.0" prefHeight="25.0" prefWidth="166.0" />
+            <CheckBox fx:id="zipCodeCheckBox" layoutX="1106.0" layoutY="287.0" mnemonicParsing="false" text="ZIPCODE">
+                <font>
+                    <Font name="Arial" size="14.0" />
+                </font>
+            </CheckBox>
+            <CheckBox fx:id="boroughCheckBox" layoutX="1106.0" layoutY="312.0" mnemonicParsing="false" text="BOROUGH">
+                <font>
+                    <Font name="Arial" size="14.0" />
+                </font>
+            </CheckBox>
+            <CheckBox fx:id="stationCheckBox" layoutX="1106.0" layoutY="337.0" mnemonicParsing="false" text="STATION">
+                <font>
+                    <Font name="Arial" size="14.0" />
+                </font>
+            </CheckBox>
+            <CheckBox fx:id="bikeCountCheckBox" layoutX="1106.0" layoutY="363.0" mnemonicParsing="false" text="BIKE COUNT">
+                <font>
+                    <Font name="Arial" size="14.0" />
+                </font>
+            </CheckBox>
+            <TextField fx:id="zipCodeTextField" disable="true" layoutX="1108.0" layoutY="424.0" prefHeight="25.0" prefWidth="165.0" />
+            <Label fx:id="zipLabel" disable="true" layoutX="1110.0" layoutY="404.0" text="Zipcode:">
+                <font>
+                    <Font name="Arial Bold" size="16.0" />
+                </font>
+            </Label>
+            <Label fx:id="stationLabel" disable="true" layoutX="1107.0" layoutY="514.0" text="Station:">
+                <font>
+                    <Font name="Arial Bold" size="16.0" />
+                </font>
+            </Label>
+            <ChoiceBox fx:id="stationChoiceBox" disable="true" layoutX="1107.0" layoutY="534.0" prefHeight="25.0" prefWidth="166.0" />
+            <Slider fx:id="minBikeCountSlider" layoutX="1107.0" layoutY="588.0" prefHeight="34.0" prefWidth="165.0" showTickLabels="true" snapToTicks="true" />
+            <Label fx:id="minBikeCountLabel" disable="true" layoutX="1107.0" layoutY="569.0" text="Minimum Bike Count">
+                <font>
+                    <Font name="Arial Bold" size="16.0" />
+                </font>
+            </Label>
+            <TextArea fx:id="infoTextArea" editable="false" layoutX="1110.0" layoutY="14.0" prefHeight="239.0" prefWidth="164.0" text="By default this program will use the lastest available data that CitiBike provides to the public. If you are looking to change which data is used check out the SETTINGS tab. &#10;&#10;&#10;&#10;&#10;Check Settings for Database status." wrapText="true">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font>
+            </TextArea>
+         <StackPane fx:id="mapPane" prefHeight="698.0" prefWidth="1101.0" />
+            <Pane fx:id="stationInfoPane" layoutX="890.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #a8a8a8;" visible="false">
+                <Label fx:id="stationIdLabel" layoutX="7.0" layoutY="5.0" text="Station ID:">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="stationNameLabel" layoutX="7.0" layoutY="45.0" text="Station Name:">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="stationLatitudeLabel" layoutX="7.0" layoutY="85.0" text="Latitude:">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="stationLongitudeLabel" layoutX="7.0" layoutY="125.0" text="Longitude:">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="stationBikeCountLabel" layoutX="7.0" layoutY="165.0" text="Bike Count:">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="stationId" layoutX="7.0" layoutY="25.0" text="00000000">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="stationName" layoutX="7.0" layoutY="65.0" text="Station Name Here">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="stationLatitude" layoutX="7.0" layoutY="105.0" text="00000000">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="stationLongitude" layoutX="7.0" layoutY="145.0" text="00000000">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+                <Label fx:id="stationBikeCount" layoutX="7.0" layoutY="181.0" text="00000000">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Label>
+            </Pane>
+        </AnchorPane>
+    </Tab>
+    <Tab fx:id="settingsTab" text="SETTINGS">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <RadioButton id="databaseStatus" disable="true" layoutX="490.0" layoutY="272.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="303.0" selected="true" text="Database Connection Status">
+                <font>
+                    <Font size="21.0" />
+                </font>
+            </RadioButton>
+            <Label id="databaseNameLabel" layoutX="490.0" layoutY="309.0" text="Database Name:">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <TextField fx:id="databaseNameTextField" editable="false" layoutX="631.0" layoutY="310.0" prefHeight="25.0" prefWidth="191.0" text="Name Here" />
+            <Label fx:id="databaseIpLabel" layoutX="490.0" layoutY="348.0" text="Database IP(Internet Protocol):">
+                <font>
+                    <Font size="18.0" />
+                </font>
+            </Label>
+            <TextField fx:id="databaseIpTextField" editable="false" layoutX="741.0" layoutY="349.0" prefHeight="25.0" prefWidth="81.0" text="000.000.000" />
+            <Button fx:id="refreshDatabaseStatusButton" layoutX="490.0" layoutY="380.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="332.0" text="Refresh Status">
+                <font>
+                    <Font name="System Bold" size="18.0" />
+                </font>
+            </Button>
+        </AnchorPane>
+    </Tab>
+</TabPane>
