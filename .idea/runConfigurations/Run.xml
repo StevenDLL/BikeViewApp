@@ -1,6 +1,6 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="com.laughingalpaca.bikeviewapp.Launcher" />
+    <option name="MAIN_CLASS_NAME" value="com.laughingalpaca.bikeviewapp.View.Launcher" />
     <module name="BikeViewApp" />
     <method v="2">
       <option name="Make" enabled="true" />
