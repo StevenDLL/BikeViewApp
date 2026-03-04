@@ -127,6 +127,11 @@ public class MainController implements Initializable {
         });
     }
 
+    //TODO: Here we will handle initializing the choice box options, pass all possible boroughs and all possible stations
+    private void InitializeChoiceBoxes(){
+
+    }
+
     //TODO: Implement displaying a map using https://github.com/gluonhq/maps
     private void InitializeMapView(List<Object> stationsList) {
 
