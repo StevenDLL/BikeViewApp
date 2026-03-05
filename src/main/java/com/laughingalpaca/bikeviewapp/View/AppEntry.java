@@ -22,9 +22,20 @@ public class AppEntry extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(AppEntry.class.getResource("/com/laughingalpaca/bikeviewapp/CitiBikeProjectView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
-        scene.getStylesheets().add(String.valueOf(getClass().getResource("/com/laughingalpaca/bikeviewapp/stylesheet.css")));
+        ShowAppLauncher(stage);
+//        FXMLLoader fxmlLoader = new FXMLLoader(AppEntry.class.getResource("/com/laughingalpaca/bikeviewapp/CitiBikeProjectView.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
+//        scene.getStylesheets().add(String.valueOf(getClass().getResource("/com/laughingalpaca/bikeviewapp/stylesheet.css")));
+//        stage.setTitle("Citi Bike Viewing App");
+//        stage.setScene(scene);
+//        stage.setResizable(false);
+//        stage.initStyle(StageStyle.UNIFIED);
+//        stage.show();
+    }
+
+    void ShowAppLauncher(Stage stage) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(AppEntry.class.getResource("/com/laughingalpaca/bikeviewapp/AppLauncherView.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 375, 555);
         stage.setTitle("Citi Bike Viewing App");
         stage.setScene(scene);
         stage.setResizable(false);
