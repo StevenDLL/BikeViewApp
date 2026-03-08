@@ -26,7 +26,9 @@ public class AppLauncherController implements Initializable {
     }
 
     private void InitializeEventHandlers() {
-
+        launchMapButton.setOnMouseClicked(mouseEvent -> {
+            
+        });
     }
 
 }
