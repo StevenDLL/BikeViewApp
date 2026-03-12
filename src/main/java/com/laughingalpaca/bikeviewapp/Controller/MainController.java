@@ -141,7 +141,7 @@ public class MainController implements Initializable {
 
     }
 
-    //TODO: Daniels todo, was having issues with github so i pasted his code in for him.
+    //TODO: Daniels todo, was having issues with github so i pasted his code in for him. --DONE
     private void FillMapList(List<Station> tempList) {
         tempList.add(new Station("ST01", "Times Square - 42 St", new MapPoint(40.7552, -73.9871), (int) (Math.random() * 301)));
         tempList.add(new Station("ST02", "Grand Central - 42 St", new MapPoint(40.7517, -73.9768), (int) (Math.random() * 301)));
@@ -165,7 +165,7 @@ public class MainController implements Initializable {
         tempList.add(new Station("ST20", "Wall St", new MapPoint(40.7075, -74.0113), (int) (Math.random() * 301)));
     }
 
-    //TODO: Implement displaying a map using https://github.com/gluonhq/maps - Done
+    //TODO: Implement displaying a map using https://github.com/gluonhq/maps -- DONE
     private void InitializeMapView(List<Station> stationsList) {
         MapView mapView = new MapView();
         MapPoint newYorkPoint = new MapPoint(40.776676, -73.971321);
