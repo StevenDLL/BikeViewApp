@@ -141,6 +141,30 @@ public class MainController implements Initializable {
 
     }
 
+    //TODO: Daniels todo, was having issues with github so i pasted his code in for him.
+    private void FillMapList(List<Station> tempList) {
+        tempList.add(new Station("ST01", "Times Square - 42 St", new MapPoint(40.7552, -73.9871), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST02", "Grand Central - 42 St", new MapPoint(40.7517, -73.9768), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST03", "34 St - Penn Station", new MapPoint(40.7505, -73.9936), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST04", "14 St - Union Square", new MapPoint(40.7346, -73.9903), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST05", "World Trade Center", new MapPoint(40.7126, -74.0099), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST06", "Atlantic Av - Barclays Ctr", new MapPoint(40.6844, -73.9785), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST07", "Fulton St", new MapPoint(40.7103, -74.0065), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST08", "59 St - Columbus Circle", new MapPoint(40.7682, -73.9819), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST09", "Coney Island - Stillwell Av", new MapPoint(40.5774, -73.9818), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST10", "Jackson Hts - Roosevelt Av", new MapPoint(40.7466, -73.8913), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST11", "Flushing - Main St", new MapPoint(40.7596, -73.8300), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST12", "161 St - Yankee Stadium", new MapPoint(40.8279, -73.9256), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST13", "St George Terminal", new MapPoint(40.6437, -74.0736), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST14", "Canal St", new MapPoint(40.7188, -74.0017), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST15", "Jay St - MetroTech", new MapPoint(40.6923, -73.9873), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST16", "Astoria - Ditmars Blvd", new MapPoint(40.7750, -73.9120), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST17", "Christopher St - Sheridan Sq", new MapPoint(40.7331, -74.0030), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST18", "72 St (Upper West Side)", new MapPoint(40.7784, -73.9819), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST19", "Fordham Rd", new MapPoint(40.8625, -73.8977), (int) (Math.random() * 301)));
+        tempList.add(new Station("ST20", "Wall St", new MapPoint(40.7075, -74.0113), (int) (Math.random() * 301)));
+    }
+
     //TODO: Implement displaying a map using https://github.com/gluonhq/maps - Done
     private void InitializeMapView(List<Station> stationsList) {
         MapView mapView = new MapView();
@@ -148,6 +172,7 @@ public class MainController implements Initializable {
         mapView.setCenter(newYorkPoint);
         mapView.setZoom(12);
 
+        FillMapList(stationsList);
         Label[] labels = {
                 stationId,
                 stationName,
