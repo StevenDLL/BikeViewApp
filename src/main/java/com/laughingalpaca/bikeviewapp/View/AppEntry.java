@@ -22,11 +22,7 @@ public class AppEntry extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        ShowMapView(stage);
-        //ShowAppView(stage);
-    }
-
-    void ShowMapView(Stage stage) throws IOException {
+        //ShowAppLauncher(stage);
         FXMLLoader fxmlLoader = new FXMLLoader(AppEntry.class.getResource("/com/laughingalpaca/bikeviewapp/CitiBikeProjectView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1280, 720);
         scene.getStylesheets().add(String.valueOf(getClass().getResource("/com/laughingalpaca/bikeviewapp/stylesheet.css")));
@@ -37,7 +33,7 @@ public class AppEntry extends Application {
         stage.show();
     }
 
-    void ShowAppView(Stage stage) throws IOException {
+    void ShowAppLauncher(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(AppEntry.class.getResource("/com/laughingalpaca/bikeviewapp/AppLauncherView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 375, 555);
         stage.setTitle("Citi Bike Viewing App");
