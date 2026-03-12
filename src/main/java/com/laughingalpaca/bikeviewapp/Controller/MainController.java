@@ -2,6 +2,7 @@ package com.laughingalpaca.bikeviewapp.Controller;
 
 import com.gluonhq.maps.MapPoint;
 import com.gluonhq.maps.MapView;
+import com.laughingalpaca.bikeviewapp.Model.Station;
 import com.laughingalpaca.bikeviewapp.StationMapLayer;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -140,13 +141,21 @@ public class MainController implements Initializable {
 
     }
 
-    //TODO: Implement displaying a map using https://github.com/gluonhq/maps
-    private void InitializeMapView(List<Object> stationsList) {
+    //TODO: Implement displaying a map using https://github.com/gluonhq/maps - Done
+    private void InitializeMapView(List<Station> stationsList) {
         MapView mapView = new MapView();
         MapPoint newYorkPoint = new MapPoint(40.776676, -73.971321);
         mapView.setCenter(newYorkPoint);
         mapView.setZoom(12);
-        StationMapLayer stationMapLayer = new StationMapLayer();
+
+        Label[] labels = {
+                stationId,
+                stationName,
+                stationLatitude,
+                stationLongitude,
+                stationBikeCount,
+        };
+        StationMapLayer stationMapLayer = new StationMapLayer(stationsList, stationInfoPane, labels);
         mapView.addLayer(stationMapLayer);
         mapPane.getChildren().add(mapView);
     }

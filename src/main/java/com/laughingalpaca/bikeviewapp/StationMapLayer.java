@@ -39,17 +39,17 @@ public class StationMapLayer extends MapLayer {
             circle.setOnMouseClicked(mouseEvent -> {
                 if (mouseEvent.getButton() == MouseButton.PRIMARY) {
                     pane.setVisible(true);
-                    labels[0].setText(station.station_id);
-                    labels[1].setText(station.station_name);
-                    labels[2].setText(String.valueOf(station.location.getLatitude()));
-                    labels[3].setText(String.valueOf(station.location.getLongitude()));
-                    labels[4].setText(String.valueOf(station.estimated_bike_count));
+                    labels[0].setText(station.getStation_id());
+                    labels[1].setText(station.getStation_name());
+                    labels[2].setText(String.valueOf(station.getLocation().getLatitude()));
+                    labels[3].setText(String.valueOf(station.getLocation().getLongitude()));
+                    labels[4].setText(String.valueOf(station.getEstimated_bike_count()));
                 }
 
             });
 
 
-            Tooltip tooltip = new Tooltip(station.station_name);
+            Tooltip tooltip = new Tooltip(station.getStation_name());
             tooltip.setShowDelay(Duration.millis(100));
             tooltip.setStyle("-fx-font-size: 14");
 
@@ -70,7 +70,7 @@ public class StationMapLayer extends MapLayer {
     protected void layoutLayer() {
         // Iterate through all markers and update their screen position
         map.forEach((station, node) -> {
-            MapPoint point = station.location;
+            MapPoint point = station.getLocation();
             Point2D screenPoint = getMapPoint(point.getLatitude(), point.getLongitude());
             if (screenPoint != null) {
                 node.setVisible(true);
