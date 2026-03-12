@@ -1,5 +1,6 @@
 package com.laughingalpaca.bikeviewapp.View;
 
+
 import javafx.application.Application;
 
 public class Launcher {

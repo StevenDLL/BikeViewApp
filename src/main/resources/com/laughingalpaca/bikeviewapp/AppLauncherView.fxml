@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane fx:id="appPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="375.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laughingalpaca.bikeviewapp.Controller.AppLauncherController">
+    <Pane fx:id="appLoginPane" prefHeight="555.0" prefWidth="375.0" style="-fx-background-color: #2b2751;">
+        <Label layoutX="76.0" layoutY="188.0" text="Bike View App" textFill="WHITE">
+            <font>
+                <Font name="Berlin Sans FB" size="36.0" />
+            </font>
+        </Label>
+        <Text fill="WHITE" fontSmoothingType="LCD" layoutX="49.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Track bike stations across New York City and New Jercey using the latest released data by Citi Bike" textAlignment="CENTER" wrappingWidth="278.0">
+            <font>
+                <Font name="System Italic" size="18.0" />
+            </font>
+        </Text>
+        <Label layoutX="4.0" layoutY="528.0" text="Last Updated:" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label fx:id="lastUpdatedDateLabel" layoutX="134.0" layoutY="528.0" text="00/00/0000" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Label>
+        <Button fx:id="launchMapButton" layoutX="44.0" layoutY="358.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="290.0" style="-fx-background-color: #625bb2;" text="Launch Map" textAlignment="JUSTIFY" textFill="WHITE">
+            <font>
+                <Font name="Berlin Sans FB" size="24.0" />
+            </font>
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+        </Button>
+        <Pane fx:id="appIconHolder" layoutX="126.0" layoutY="54.0" prefHeight="124.0" prefWidth="124.0" style="-fx-background-color: white; -fx-background-radius: 25;">
+            <ImageView fx:id="appIcon" fitHeight="124.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@Image/bike.png" />
+            </ImageView>
+        </Pane>
+        <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="338.0" layoutY="519.0" pickOnBounds="true" preserveRatio="true">
+            <cursor>
+                <Cursor fx:constant="HAND" />
+            </cursor>
+            <Image url="@Image/github.png" />
+        </ImageView>
+    </Pane>
+</Pane>
