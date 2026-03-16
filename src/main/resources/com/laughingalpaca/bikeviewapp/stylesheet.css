@@ -2,3 +2,55 @@
     -fx-background-color: red;
     -fx-background-insets: 0;
 }
+
+.station-card {
+    -fx-background-color: rgba(28, 28, 46, 0.75);
+    -fx-background-radius: 12;
+    -fx-border-color: rgba(255,255,255,0.07);
+    -fx-border-width: 1;
+    -fx-border-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.55), 20, 0, 0, 5);
+}
+
+.station-card-accent {
+    -fx-background-color: #625bb2;
+    -fx-background-radius: 12 12 0 0;
+}
+
+.station-card-header-label {
+    -fx-text-fill: white;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 12;
+    -fx-font-weight: 900;
+}
+
+.station-divider {
+    -fx-background-color: rgba(255,255,255,0.07);
+}
+
+.station-field-label {
+    -fx-text-fill: rgba(255,255,255,0.4);
+    -fx-font-family: Arial;
+    -fx-font-size: 9;
+    -fx-font-weight: bold;
+}
+
+.station-field-value {
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+}
+
+.station-field-secondary {
+    -fx-text-fill: rgba(255,255,255,0.65);
+    -fx-font-family: Arial;
+    -fx-font-size: 12;
+}
+
+.station-bike-count {
+    -fx-text-fill: #625bb2;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 30;
+    -fx-font-weight: 900;
+}
