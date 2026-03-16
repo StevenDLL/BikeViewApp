@@ -24,16 +24,20 @@ public class StationMapLayer extends MapLayer {
     public StationMapLayer(List<Station> stationList, Pane pane, Label[] labels) {
         pane.setOpacity(0.9);
         for (Station station : stationList) {
-            Circle circle = new Circle(8, Color.ORANGERED);
-            circle.setStroke(Color.WHITE);
+            Circle circle = new Circle(5, Color.web("#625bb2"));
+            circle.setStroke(Color.web("#2b2751"));
             circle.setStrokeWidth(3);
 
             circle.setOnMouseEntered(mouseEvent -> {
                 this.setCursor(Cursor.HAND);
+                circle.setFill(Color.web("#8f89d4"));
+                circle.setRadius(7);
             });
 
             circle.setOnMouseExited(mouseEvent -> {
                 this.setCursor(Cursor.DEFAULT);
+                circle.setFill(Color.web("#625bb2"));
+                circle.setRadius(5);
             });
 
             circle.setOnMouseClicked(mouseEvent -> {
@@ -48,10 +52,20 @@ public class StationMapLayer extends MapLayer {
 
             });
 
-
             Tooltip tooltip = new Tooltip(station.getStation_name());
             tooltip.setShowDelay(Duration.millis(100));
-            tooltip.setStyle("-fx-font-size: 14");
+            tooltip.setStyle(
+                    "-fx-background-color: #2b2751;" +
+                            "-fx-text-fill: white;" +
+                            "-fx-font-family: Arial;" +
+                            "-fx-font-size: 13px;" +
+                            "-fx-font-weight: bold;" +
+                            "-fx-border-color: #625bb2;" +
+                            "-fx-border-width: 1;" +
+                            "-fx-border-radius: 6;" +
+                            "-fx-background-radius: 6;" +
+                            "-fx-padding: 6 10 6 10;"
+            );
 
             Tooltip.install(circle, tooltip);
 
@@ -82,3 +96,37 @@ public class StationMapLayer extends MapLayer {
         });
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
