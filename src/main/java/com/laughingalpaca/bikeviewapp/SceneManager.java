@@ -42,6 +42,7 @@ public class SceneManager {
                 listOfScenes.put(fxmlPath, scene);
             }
 
+            scene.getStylesheets().add(String.valueOf(getClass().getResource("/com/laughingalpaca/bikeviewapp/stylesheet.css")));
             primaryStage.setScene(scene);
             primaryStage.show();
             primaryStage.centerOnScreen();
