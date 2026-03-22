@@ -1,5 +1,7 @@
 package com.laughingalpaca.bikeviewapp.Controller;
 
+import com.laughingalpaca.bikeviewapp.SceneManager;
+import com.laughingalpaca.bikeviewapp.View.AppEntry;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,7 +28,9 @@ public class AppLauncherController implements Initializable {
     }
 
     private void InitializeEventHandlers() {
-
+        launchMapButton.setOnMouseClicked(mouseEvent -> {
+            SceneManager.getInstance().switchScene("/com/laughingalpaca/bikeviewapp/CitiBikeProjectView.fxml");
+        });
     }
 
 }
