@@ -3,8 +3,6 @@ package com.laughingalpaca.bikeviewapp.View;
 import com.laughingalpaca.bikeviewapp.DataHandler;
 import com.laughingalpaca.bikeviewapp.SceneManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
