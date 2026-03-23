@@ -224,7 +224,6 @@ public class MainController implements Initializable {
 
     }
 
-
     //TODO: Implement displaying a map using https://github.com/gluonhq/maps -- DONE
     private void InitializeMapView(List<Station> stationsList) {
         MapView mapView = new MapView();
@@ -244,5 +243,4 @@ public class MainController implements Initializable {
         mapView.addLayer(stationMapLayer);
         mapPane.getChildren().add(mapView);
     }
-
 }
