@@ -6,8 +6,6 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.IOException;
-
 public class AppEntry extends Application {
 
     DataHandler appDataHandler;
@@ -20,13 +18,12 @@ public class AppEntry extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
 
         stage.setTitle("Citi Bike Viewing App");
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNIFIED);
         stage.centerOnScreen();
-
         SceneManager.getInstance().setStage(stage);
         SceneManager.getInstance().switchScene("/com/laughingalpaca/bikeviewapp/AppLauncherView.fxml");
     }
