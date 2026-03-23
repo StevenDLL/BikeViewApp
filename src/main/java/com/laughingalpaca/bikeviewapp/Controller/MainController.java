@@ -222,7 +222,6 @@ public class MainController implements Initializable {
         tempList.add(new Station("ST75", "Williamsburg - Marcy Av", new MapPoint(40.7083, -73.9577), (int) (Math.random() * 301)));
     }
 
-    }
 
     //TODO: Implement displaying a map using https://github.com/gluonhq/maps -- DONE
     private void InitializeMapView(List<Station> stationsList) {
