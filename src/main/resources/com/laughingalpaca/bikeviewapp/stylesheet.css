@@ -54,3 +54,35 @@
     -fx-font-size: 30;
     -fx-font-weight: 900;
 }
+.main-tab-pane {
+    -fx-background-color: #2b2751;
+}
+
+.main-tab-pane > .tab-header-area {
+    -fx-background-color: #2b2751;
+}
+
+.main-tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: #2b2751;
+}
+
+.main-tab-pane > .tab-header-area > .headers-region > .tab {
+    -fx-background-color: #2b2751;
+    -fx-padding: 6 18 6 18;
+    -fx-cursor: hand;
+}
+
+.main-tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: #625bb2;
+}
+
+.main-tab-pane > .tab-header-area > .headers-region > .tab .tab-label {
+    -fx-text-fill: rgba(255,255,255,0.55);
+    -fx-font-family: "Arial";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.main-tab-pane > .tab-header-area > .headers-region > .tab:selected .tab-label {
+    -fx-text-fill: white;
+}
