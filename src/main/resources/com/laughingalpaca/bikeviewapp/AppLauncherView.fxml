@@ -38,14 +38,14 @@
         </Button>
         <Pane fx:id="appIconHolder" layoutX="126.0" layoutY="54.0" prefHeight="124.0" prefWidth="124.0" style="-fx-background-color: white; -fx-background-radius: 25;">
             <ImageView fx:id="appIcon" fitHeight="124.0" fitWidth="124.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@Image/bike.png" />
+                <Image url="@Images/bike.png" />
             </ImageView>
         </Pane>
         <ImageView fitHeight="36.0" fitWidth="36.0" layoutX="338.0" layoutY="519.0" pickOnBounds="true" preserveRatio="true">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
-            <Image url="@Image/github.png" />
+            <Image url="@Images/github.png" />
         </ImageView>
     </Pane>
 </Pane>
