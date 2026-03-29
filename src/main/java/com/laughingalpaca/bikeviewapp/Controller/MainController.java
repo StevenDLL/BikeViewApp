@@ -31,11 +31,8 @@ public class MainController implements Initializable {
     // START OF ROUTES MAP CODE
     private void InitializeRoutesMap() {
         MapView routesMapView = new MapView();
-        // Sets center to NYC to match the main map
         routesMapView.setCenter(new MapPoint(40.776676, -73.971321));
         routesMapView.setZoom(12);
-
-        // Adds the map to the StackPane defined in the ROUTES tab
         routesMapPane.getChildren().add(routesMapView);
     }
 
