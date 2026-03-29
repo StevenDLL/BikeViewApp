@@ -139,7 +139,7 @@
             </Label>
             <ChoiceBox fx:id="startStationChoiceBox" layoutX="1107.0" layoutY="320.0" prefHeight="25.0" prefWidth="166.0" />
 
-            <Label layoutX="1107.0" layoutY="360.0" text="END ROUTE:">  
+            <Label layoutX="1107.0" layoutY="360.0" text="END ROUTE:">
                 <font>
                     <Font name="Arial Bold" size="14.0" />
                 </font>
