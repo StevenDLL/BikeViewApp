@@ -1,5 +1,5 @@
 #databaseStatus.radio-button:selected .radio .dot {
-    -fx-background-color: red;
+    -fx-background-color: #40ff00;
     -fx-background-insets: 0;
 }
 
@@ -96,6 +96,7 @@
     -fx-font-family: "Arial Black";
     -fx-font-size: 13px;
     -fx-font-weight: 900;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.5), 10, 0, 0, 0);
 }
 
 .sidebar-label {
@@ -103,6 +104,7 @@
     -fx-font-family: "Arial";
     -fx-font-size: 13px;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.3), 8, 0, 0, 0);
 }
 
 .sidebar-checkbox {
@@ -110,6 +112,7 @@
     -fx-font-family: "Arial";
     -fx-font-size: 13px;
     -fx-mark-color: white;
+    -fx-effect: dropshadow(gaussian, rgba(255,255,255,0.3), 8, 0, 0, 0);
 }
 
 .sidebar-checkbox .box {
