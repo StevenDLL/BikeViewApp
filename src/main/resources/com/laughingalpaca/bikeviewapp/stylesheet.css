@@ -204,3 +204,68 @@
     -fx-background-color: #2b2751;
 }
 
+/* this is for the splash screen */
+.launcher-pane {
+    -fx-background-color: #2b2751;
+}
+
+.launcher-icon-holder {
+    -fx-background-color: white;
+    -fx-background-radius: 34;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 24, 0, 0, 6);
+}
+
+.launcher-title {
+    -fx-text-fill: white;
+    -fx-font-family: "Berlin Sans FB";
+    -fx-font-size: 40;
+    -fx-font-weight: bold;
+}
+
+.launcher-tagline {
+    -fx-text-fill: rgba(255,255,255,0.6);
+    -fx-font-family: Arial;
+    -fx-font-size: 11;
+    -fx-font-weight: bold;
+}
+
+.launcher-divider {
+    -fx-background-color: rgba(255,255,255,0.15);
+}
+
+.launcher-button {
+    -fx-background-color: #625bb2;
+    -fx-text-fill: white;
+    -fx-font-family: "Berlin Sans FB";
+    -fx-font-size: 24;
+    -fx-background-radius: 14;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(98,91,178,0.6), 14, 0, 0, 4);
+}
+
+.launcher-button:hover {
+    -fx-background-color: #8f89d4;
+    -fx-effect: dropshadow(gaussian, rgba(98,91,178,0.8), 18, 0, 0, 4);
+}
+
+.launcher-button:pressed {
+    -fx-background-color: #2b2751;
+    -fx-effect: none;
+}
+
+.launcher-bottom-strip {
+    -fx-background-color: rgba(255,255,255,0.1);
+}
+
+.launcher-footer-label {
+    -fx-text-fill: rgba(255,255,255,0.45);
+    -fx-font-family: Arial;
+    -fx-font-size: 13;
+    -fx-font-weight: bold;
+}
+
+.launcher-footer-value {
+    -fx-text-fill: rgba(255,255,255,0.45);
+    -fx-font-family: Arial;
+    -fx-font-size: 13;
+}
