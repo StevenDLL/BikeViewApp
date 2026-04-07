@@ -68,6 +68,7 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         InitializeEventHandlers();
         InitializeChoiceBoxes();
+        InitializeMapView(new ArrayList<>());
 
     }
 
