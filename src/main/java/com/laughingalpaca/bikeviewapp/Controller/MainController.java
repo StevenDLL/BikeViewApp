@@ -69,8 +69,10 @@ public class MainController implements Initializable {
         InitializeEventHandlers();
         InitializeChoiceBoxes();
         InitializeMapView(new ArrayList<>());
+
     }
 
+        //TODO: We will pass the actual stationList that we receive from the database, for now we pass a blank list
 
     private void InitializeEventHandlers() {
 
