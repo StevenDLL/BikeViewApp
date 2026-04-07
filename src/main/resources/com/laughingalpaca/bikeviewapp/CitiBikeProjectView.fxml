@@ -57,30 +57,44 @@
         </AnchorPane>
     </Tab>
 
-    <Tab fx:id="settingsTab" text="SETTINGS">
+    <Tab fx:id="routesTab" text="ROUTES">
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-            <RadioButton id="databaseStatus" disable="true" layoutX="490.0" layoutY="272.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="303.0" selected="true" text="Database Connection Status">
+
+            <StackPane fx:id="routesMapPane" prefHeight="698.0" prefWidth="1101.0" />
+
+            <Label layoutX="1123.0" layoutY="259.0" text="ROUTE PLANNER">
                 <font>
-                    <Font size="21.0" />
-                </font>
-            </RadioButton>
-            <Label id="databaseNameLabel" layoutX="490.0" layoutY="309.0" text="Database Name:">
-                <font>
-                    <Font size="18.0" />
+                    <Font name="Arial Bold" size="16.0" />
                 </font>
             </Label>
-            <TextField fx:id="databaseNameTextField" editable="false" layoutX="631.0" layoutY="310.0" prefHeight="25.0" prefWidth="191.0" text="Name Here" />
-            <Label fx:id="databaseIpLabel" layoutX="490.0" layoutY="348.0" text="Database IP(Internet Protocol):">
+
+            <Label layoutX="1107.0" layoutY="300.0" text="START ROUTE:">
                 <font>
-                    <Font size="18.0" />
+                    <Font name="Arial Bold" size="14.0" />
                 </font>
             </Label>
-            <TextField fx:id="databaseIpTextField" editable="false" layoutX="741.0" layoutY="349.0" prefHeight="25.0" prefWidth="81.0" text="000.000.000" />
-            <Button fx:id="refreshDatabaseStatusButton" layoutX="490.0" layoutY="380.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="332.0" text="Refresh Status">
+            <ChoiceBox fx:id="startStationChoiceBox" layoutX="1107.0" layoutY="320.0" prefHeight="25.0" prefWidth="166.0" />
+
+            <Label layoutX="1107.0" layoutY="360.0" text="END ROUTE:">
                 <font>
-                    <Font name="System Bold" size="18.0" />
+                    <Font name="Arial Bold" size="14.0" />
+                </font>
+            </Label>
+            <ChoiceBox fx:id="endStationChoiceBox" layoutX="1107.0" layoutY="380.0" prefHeight="25.0" prefWidth="166.0" />
+
+            <Button fx:id="showRouteButton" layoutX="1122.0" layoutY="430.0" mnemonicParsing="false" text="SHOW ROUTE" textAlignment="CENTER">
+                <font>
+                    <Font name="System Bold" size="16.0" />
                 </font>
             </Button>
+
+            <TextArea editable="false" layoutX="1110.0" layoutY="14.0" prefHeight="239.0" prefWidth="164.0"
+                      text="Select a start and end station to draw a route line on the map.&#10;&#10;This shows the straight-line path between any two Citi Bike stations."
+                      wrapText="true">
+                <font>
+                    <Font name="Arial Bold" size="12.0" />
+                </font>
+            </TextArea>
         </AnchorPane>
     </Tab>
 </TabPane>
