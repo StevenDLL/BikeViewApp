@@ -8,6 +8,13 @@ import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.laughingalpaca.bikeviewapp.Model.Station;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 public final class GbfsSyncService {
 
@@ -37,4 +44,44 @@ public final class GbfsSyncService {
         }
         return objectMapper.readTree(response.body());
     }
+
+    public List<Station> fetchLiveStations() throws IOException, InterruptedException {
+        JsonNode stationInformationRoot = fetchJson(STATION_INFORMATION_URL);
+        JsonNode stationStatusRoot = fetchJson(STATION_STATUS_URL);
+
+        Map<String, JsonNode> statusByStationId = new HashMap<>();
+        Iterator<JsonNode> stationStatusIterator = stationStatusRoot.path("data").path("stations").elements();
+        while (stationStatusIterator.hasNext()) {
+            JsonNode stationStatus = stationStatusIterator.next();
+            String stationId = stationStatus.path("station_id").asText("");
+            if (!stationId.isBlank()) {
+                statusByStationId.put(stationId, stationStatus);
+            }
+        }
+
+        Instant feedUpdatedAt = Instant.ofEpochSecond(stationStatusRoot.path("last_updated").asLong(Instant.now().getEpochSecond()));
+
+        List<Station> stations = new ArrayList<>();
+        Iterator<JsonNode> stationInformationIterator = stationInformationRoot.path("data").path("stations").elements();
+        while (stationInformationIterator.hasNext()) {
+            JsonNode stationInformation = stationInformationIterator.next();
+            String stationId = stationInformation.path("station_id").asText("");
+            String stationName = stationInformation.path("name").asText("");
+            double latitude = stationInformation.path("lat").asDouble(Double.NaN);
+            double longitude = stationInformation.path("lon").asDouble(Double.NaN);
+
+            if (stationId.isBlank() || stationName.isBlank() || Double.isNaN(latitude) || Double.isNaN(longitude)) {
+                continue;
+            }
+
+            JsonNode statusNode = statusByStationId.get(stationId);
+            int bikeCount = statusNode == null ? 0 : statusNode.path("num_bikes_available").asInt(0);
+
+            stations.add(new Station(stationId, stationName, new MapPoint(latitude, longitude), bikeCount, "", "", feedUpdatedAt));
+        }
+
+        geoBoundaryService.enrichStationsWithBoroughs(stations);
+        return stations;
+    }
+
 }
