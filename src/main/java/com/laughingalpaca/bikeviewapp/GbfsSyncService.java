@@ -15,6 +15,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.WriteResult;
+import java.util.concurrent.ExecutionException;
+
 
 public final class GbfsSyncService {
 
@@ -83,5 +88,32 @@ public final class GbfsSyncService {
         geoBoundaryService.enrichStationsWithBoroughs(stations);
         return stations;
     }
+    public int syncLiveStationsToFirestore(Firestore firestore) throws IOException, InterruptedException, ExecutionException {
+        List<Station> stations = fetchLiveStations();
 
+        for (Station station : stations) {
+            Map<String, Object> stationDocument = new HashMap<>();
+            stationDocument.put("stationId", station.getStation_id());
+            stationDocument.put("stationName", station.getStation_name());
+            stationDocument.put("latitude", station.getLocation().getLatitude());
+            stationDocument.put("longitude", station.getLocation().getLongitude());
+            stationDocument.put("estimatedBikeCount", station.getEstimated_bike_count());
+            stationDocument.put("borough", station.getBorough());
+            stationDocument.put("zipCode", station.getZip_code());
+            stationDocument.put("lastUpdated", station.getLast_updated() == null ? Instant.now().toString() : station.getLast_updated().toString());
+
+            ApiFuture<WriteResult> future = firestore.collection("stations")
+                    .document(station.getStation_id())
+                    .set(stationDocument);
+            future.get();
+        }
+
+        Map<String, Object> metadataDocument = new HashMap<>();
+        metadataDocument.put("lastUpdated", Instant.now().toString());
+        metadataDocument.put("sourceName", "Lyft GBFS station feed");
+        metadataDocument.put("syncStatus", "live_sync_complete");
+        firestore.collection("app_metadata").document("status").set(metadataDocument).get();
+
+        return stations.size();
+    }
 }
