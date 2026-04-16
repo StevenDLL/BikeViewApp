@@ -81,9 +81,7 @@ public class MainController implements Initializable {
         InitializeChoiceBoxes();
         InitializeMapView(new ArrayList<>());
 
-        InitializeRoutesMap();
     }
-
 
     private void InitializeEventHandlers() {
 
