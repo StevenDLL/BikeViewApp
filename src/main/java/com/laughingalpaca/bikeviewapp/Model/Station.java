@@ -2,7 +2,12 @@ package com.laughingalpaca.bikeviewapp.Model;
 
 import com.gluonhq.maps.MapPoint;
 
+import java.time.Instant;
+
 public class Station {
+    public Station(String stationId, String stationName, MapPoint location, int estimatedBikeCount, String borough, String s, Instant lastUpdated) {
+    }
+
     public String getStation_id() {
         return station_id;
     }
@@ -45,5 +50,9 @@ public class Station {
         this.station_name = station_name;
         this.location = location;
         this.estimated_bike_count = estimated_bike_count;
+    }
+
+    public Object getLast_updated() {
+        return null;
     }
 }
