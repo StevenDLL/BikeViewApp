@@ -52,7 +52,22 @@ public class Station {
         this.estimated_bike_count = estimated_bike_count;
     }
 
+    //TODO: RETURN TO THIS
     public Object getLast_updated() {
         return null;
+    }
+
+    //TODO: RETURN TO THIS
+    public String getBorough() {
+        return null;
+    }
+
+    //TODO: RETURN TO THIS
+    public Object getZip_code() {
+        return null;
+    }
+
+    //TODO: RETURN TO THIS
+    public void setBorough(String borough) {
     }
 }

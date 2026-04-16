@@ -2,22 +2,27 @@ package com.laughingalpaca.bikeviewapp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gluonhq.maps.MapPoint;
+
 import java.net.http.HttpClient;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.laughingalpaca.bikeviewapp.Model.Station;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
+
 import java.util.concurrent.ExecutionException;
 
 
@@ -88,6 +93,7 @@ public final class GbfsSyncService {
         geoBoundaryService.enrichStationsWithBoroughs(stations);
         return stations;
     }
+
     public int syncLiveStationsToFirestore(Firestore firestore) throws IOException, InterruptedException, ExecutionException {
         List<Station> stations = fetchLiveStations();
 

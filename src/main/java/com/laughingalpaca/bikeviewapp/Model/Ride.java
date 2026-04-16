@@ -13,4 +13,11 @@ public class Ride {
 
     public Ride(String rideId, RideableType rideableType, Station startStation, Station endStation, Instant startedAt, Instant endedAt) {
     }
+
+    public Station getStart_station() {
+    }
+
+    public Station getEnd_station() {
+        return null;
+    }
 }

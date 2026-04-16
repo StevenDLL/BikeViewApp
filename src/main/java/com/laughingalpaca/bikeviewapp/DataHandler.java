@@ -49,7 +49,7 @@ public class DataHandler {
         return INSTANCE;
     }
 
-    private DataHandler() {
+    public DataHandler() {
         refreshConnectionStatus();
     }
 
@@ -172,24 +172,25 @@ public class DataHandler {
         return firestore == null ? "Offline" : "N/A";
     }
 
-    //TODO: WAITING FOR Station to be implemented as expect.
-//    public synchronized String getLastUpdatedDisplay() {
-//        Optional<Instant> metadataTime = getMetadataLastUpdated();
-//        if (metadataTime.isPresent()) {
-//            return DISPLAY_DATE_FORMAT.format(metadataTime.get());
-//        }
-//        Optional<Instant> stationTime = cachedStations.stream()
-//                .map(Station::getLast_updated)
-//                .filter(Objects::nonNull)
-//                .max(Comparator.naturalOrder().reversed()); // TODO: CHECK THIS WORKS PROPERLY
-//        if (stationTime.isPresent()) {
-//            return DISPLAY_DATE_FORMAT.format(stationTime.get());
-//        }
-//        if (lastSuccessfulRefresh != null) {
-//            return DISPLAY_DATE_FORMAT.format(lastSuccessfulRefresh);
-//        }
-//        return "Unavailable";
-//    }
+
+    public synchronized String getLastUpdatedDisplay() {
+        Optional<Instant> metadataTime = getMetadataLastUpdated();
+        if (metadataTime.isPresent()) {
+            return DISPLAY_DATE_FORMAT.format(metadataTime.get());
+        }
+        Optional<Instant> stationTime = cachedStations.stream()
+                .map(Station::getLast_updated)
+                .filter(Objects::nonNull)
+                .max(Comparator.naturalOrder());
+        if (stationTime.isPresent()) {
+            return DISPLAY_DATE_FORMAT.format(stationTime.get());
+        }
+        if (lastSuccessfulRefresh != null) {
+            return DISPLAY_DATE_FORMAT.format(lastSuccessfulRefresh);
+        }
+        return "Unavailable";
+    }
+
     public synchronized String getStatusMessage() {
         if (usingLiveFallback) {
             return "Using live Citi Bike feed because Firestore is unavailable.";
@@ -211,13 +212,14 @@ public class DataHandler {
         return firestore;
     }
 
-    //TODO: WAITING FOR GeoBoundary to be implemented as expect.
-//    public synchronized Optional<GeoBoundary> getZipBoundary(String zipCode) {
-//        return geoBoundaryService.getZipBoundary(zipCode);
-//    }
-//    public synchronized boolean isStationInsideBoundary(Station station, GeoBoundary boundary) {
-//        return geoBoundaryService.isStationInsideZip(station, boundary);
-//    }
+    public synchronized Optional<GeoBoundary> getZipBoundary(String zipCode) {
+        return geoBoundaryService.getZipBoundary(zipCode);
+    }
+
+    public synchronized boolean isStationInsideBoundary(Station station, GeoBoundary boundary) {
+        return geoBoundaryService.isStationInsideZip(station, boundary);
+    }
+
     private Firestore initializeFirestore() {
         if (!Files.exists(SERVICE_ACCOUNT_PATH)) {
             lastError = "Missing Firebase key at " + SERVICE_ACCOUNT_PATH;
@@ -383,20 +385,21 @@ public class DataHandler {
     }
 
     //TODO: WAITING FOR gbfsSyncService to be implemented as expect.
-//    private List<Station> loadStationsFromFallback() {
-//        try {
-//            List<Station> liveStations = gbfsSyncService.fetchLiveStations();
-//            usingLiveFallback = true;
-//            cacheStations(liveStations);
-//            lastSuccessfulRefresh = Instant.now();
-//            return new ArrayList<>(cachedStations);
-//        } catch (IOException | InterruptedException exception) {
-//            if (exception instanceof InterruptedException) {
-//                Thread.currentThread().interrupt();
-//            }
-//            return new ArrayList<>(cachedStations);
-//        }
-//    }
+    private List<Station> loadStationsFromFallback() {
+        try {
+            List<Station> liveStations = gbfsSyncService.fetchLiveStations();
+            usingLiveFallback = true;
+            cacheStations(liveStations);
+            lastSuccessfulRefresh = Instant.now();
+            return new ArrayList<>(cachedStations);
+        } catch (IOException | InterruptedException exception) {
+            if (exception instanceof InterruptedException) {
+                Thread.currentThread().interrupt();
+            }
+            return new ArrayList<>(cachedStations);
+        }
+    }
+
     private void cacheStations(List<Station> stations) {
         cachedStations.clear();
         cachedStations.addAll(stations);
@@ -417,4 +420,4 @@ public class DataHandler {
         return prefix + " " + message;
     }
 }
-}
+

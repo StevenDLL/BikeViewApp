@@ -1,4 +1,5 @@
 package com.laughingalpaca.bikeviewapp;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gluonhq.maps.MapPoint;
@@ -30,6 +31,7 @@ public class GeoBoundaryService {
     private final ObjectMapper objectMapper;
     private List<GeoBoundary> boroughBoundaries;
     private final Map<String, Optional<GeoBoundary>> zipBoundaryCache = new HashMap<>();
+
     public GeoBoundaryService() {
         httpClient = HttpClient.newHttpClient();
         objectMapper = new ObjectMapper();
@@ -43,8 +45,7 @@ public class GeoBoundaryService {
                 String borough = resolveBorough(station.getLocation());
                 station.setBorough(borough);
             }
-        }
-        catch (IOException | InterruptedException exception) {
+        } catch (IOException | InterruptedException exception) {
             warnings.add("Unable to load borough boundaries.");
         }
         return warnings;
@@ -66,8 +67,7 @@ public class GeoBoundaryService {
             Optional<GeoBoundary> boundary = boundaries.stream().findFirst();
             zipBoundaryCache.put(normalizedZip, boundary);
             return boundary;
-        }
-        catch (IOException | InterruptedException exception) {
+        } catch (IOException | InterruptedException exception) {
             zipBoundaryCache.put(normalizedZip, Optional.empty());
             return Optional.empty();
         }
@@ -79,8 +79,7 @@ public class GeoBoundaryService {
         }
         try {
             ensureBoroughBoundariesLoaded();
-        }
-        catch (IOException | InterruptedException exception) {
+        } catch (IOException | InterruptedException exception) {
             if (exception instanceof InterruptedException) {
                 Thread.currentThread().interrupt();
             }
