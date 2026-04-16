@@ -14,7 +14,9 @@ public class Ride {
     public Ride(String rideId, RideableType rideableType, Station startStation, Station endStation, Instant startedAt, Instant endedAt) {
     }
 
+    //TODO: RETURN TO THIS
     public Station getStart_station() {
+        return null;
     }
 
     public Station getEnd_station() {

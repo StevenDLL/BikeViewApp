@@ -172,24 +172,24 @@ public class DataHandler {
         return firestore == null ? "Offline" : "N/A";
     }
 
-
-    public synchronized String getLastUpdatedDisplay() {
-        Optional<Instant> metadataTime = getMetadataLastUpdated();
-        if (metadataTime.isPresent()) {
-            return DISPLAY_DATE_FORMAT.format(metadataTime.get());
-        }
-        Optional<Instant> stationTime = cachedStations.stream()
-                .map(Station::getLast_updated)
-                .filter(Objects::nonNull)
-                .max(Comparator.naturalOrder());
-        if (stationTime.isPresent()) {
-            return DISPLAY_DATE_FORMAT.format(stationTime.get());
-        }
-        if (lastSuccessfulRefresh != null) {
-            return DISPLAY_DATE_FORMAT.format(lastSuccessfulRefresh);
-        }
-        return "Unavailable";
-    }
+    //TODO: RETURN TO THIS, CURRENTLY NOT WORKING
+//    public synchronized String getLastUpdatedDisplay() {
+//        Optional<Instant> metadataTime = getMetadataLastUpdated();
+//        if (metadataTime.isPresent()) {
+//            return DISPLAY_DATE_FORMAT.format(metadataTime.get());
+//        }
+//        Optional<Instant> stationTime = cachedStations.stream()
+//                .map(Station::getLast_updated)
+//                .filter(Objects::nonNull)
+//                .max(Comparator.naturalOrder());
+//        if (stationTime.isPresent()) {
+//            return DISPLAY_DATE_FORMAT.format(stationTime.get());
+//        }
+//        if (lastSuccessfulRefresh != null) {
+//            return DISPLAY_DATE_FORMAT.format(lastSuccessfulRefresh);
+//        }
+//        return "Unavailable";
+//    }
 
     public synchronized String getStatusMessage() {
         if (usingLiveFallback) {
