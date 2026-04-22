@@ -50,5 +50,29 @@ public class Station {
     public void setBorough(String borough) {
         this.borough = borough;
     }
-
+    public String getZip_code() {
+        return zip_code;
+    }
+    public void setZip_code(String zip_code) {
+        this.zip_code = zip_code;
+    }
+    public Instant getLast_updated() {
+        return last_updated;
+    }
+    public void setLast_updated(Instant last_updated) {
+        this.last_updated = last_updated;
+    }
+    public Station(String station_id, String station_name, MapPoint location, int estimated_bike_count) {
+        this(station_id, station_name, location, estimated_bike_count, "", "", null);
+    }
+    public Station(String station_id, String station_name, MapPoint location, int estimated_bike_count, String borough,
+                   String zip_code, Instant last_updated) {
+        this.station_id = station_id;
+        this.station_name = station_name;
+        this.location = location;
+        this.estimated_bike_count = estimated_bike_count;
+        this.borough = borough;
+        this.zip_code = zip_code;
+        this.last_updated = last_updated;
+    }
 }
