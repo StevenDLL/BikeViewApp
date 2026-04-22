@@ -1,13 +1,16 @@
 package com.laughingalpaca.bikeviewapp.Model;
 
 import com.gluonhq.maps.MapPoint;
-
 import java.time.Instant;
 
 public class Station {
-    public Station(String stationId, String stationName, MapPoint location, int estimatedBikeCount, String borough, String s, Instant lastUpdated) {
-    }
-
+    private String station_id;
+    private String station_name;
+    private MapPoint location;
+    private int estimated_bike_count;
+    private String borough;
+    private String zip_code;
+    private Instant last_updated;
     public String getStation_id() {
         return station_id;
     }
@@ -40,34 +43,36 @@ public class Station {
         this.estimated_bike_count = estimated_bike_count;
     }
 
-    private String station_id;
-    private String station_name;
-    private MapPoint location;
-    private int estimated_bike_count;
+    public String getBorough() {
+        return borough;
+    }
 
+    public void setBorough(String borough) {
+        this.borough = borough;
+    }
+    public String getZip_code() {
+        return zip_code;
+    }
+    public void setZip_code(String zip_code) {
+        this.zip_code = zip_code;
+    }
+    public Instant getLast_updated() {
+        return last_updated;
+    }
+    public void setLast_updated(Instant last_updated) {
+        this.last_updated = last_updated;
+    }
     public Station(String station_id, String station_name, MapPoint location, int estimated_bike_count) {
+        this(station_id, station_name, location, estimated_bike_count, "", "", null);
+    }
+    public Station(String station_id, String station_name, MapPoint location, int estimated_bike_count, String borough,
+                   String zip_code, Instant last_updated) {
         this.station_id = station_id;
         this.station_name = station_name;
         this.location = location;
         this.estimated_bike_count = estimated_bike_count;
-    }
-
-    //TODO: RETURN TO THIS
-    public Object getLast_updated() {
-        return null;
-    }
-
-    //TODO: RETURN TO THIS
-    public String getBorough() {
-        return null;
-    }
-
-    //TODO: RETURN TO THIS
-    public Object getZip_code() {
-        return null;
-    }
-
-    //TODO: RETURN TO THIS
-    public void setBorough(String borough) {
+        this.borough = borough;
+        this.zip_code = zip_code;
+        this.last_updated = last_updated;
     }
 }
