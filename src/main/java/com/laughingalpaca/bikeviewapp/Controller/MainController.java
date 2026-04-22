@@ -202,12 +202,10 @@ public class MainController implements Initializable {
     private void updateInfoPanel(List<Station> stations) {
         StringBuilder builder = new StringBuilder();
         builder.append("Source: ").append(dataHandler.getDatabaseDisplayName()).append('\n');
-        builder.append("Project: ").append(dataHandler.getProjectDisplayName()).append('\n');
         builder.append("Status: ").append(dataHandler.getStatusMessage()).append('\n');
         builder.append("Last Updated: ").append(dataHandler.getLastUpdatedDisplay()).append("\n\n");
         builder.append("Stations Loaded: ").append(allStations.size()).append('\n');
         builder.append("Stations Shown: ").append(stations.size()).append('\n');
-        builder.append("ZIP filtering is enabled in Layer 4.");
         infoTextArea.setText(builder.toString());
     }
 

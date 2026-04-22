@@ -378,7 +378,6 @@ public class DataHandler {
         return value == null ? "" : value;
     }
 
-    //TODO: WAITING FOR gbfsSyncService to be implemented as expect.
     private List<Station> loadStationsFromFallback() {
         try {
             List<Station> liveStations = gbfsSyncService.fetchLiveStations();
