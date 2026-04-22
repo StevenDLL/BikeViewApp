@@ -32,9 +32,8 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 public class DataHandler {
-    private static final Path SERVICE_ACCOUNT_PATH = Path.of("config", "firebase-service-account.json");
-    private static final DateTimeFormatter DISPLAY_DATE_FORMAT =
-            DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a").withZone(ZoneId.systemDefault());
+    private static final Path SERVICE_ACCOUNT_PATH = Path.of("config", "firebase_info/bikeviewappKey.json");
+    private static final DateTimeFormatter DISPLAY_DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a").withZone(ZoneId.systemDefault());
     private static final DataHandler INSTANCE = new DataHandler();
     private final List<Station> cachedStations = new ArrayList<>();
     private final GbfsSyncService gbfsSyncService = new GbfsSyncService();
@@ -198,10 +197,6 @@ public class DataHandler {
             return "Connected to Firestore.";
         }
         return lastError == null || lastError.isBlank() ? "Firestore connection unavailable." : lastError;
-    }
-
-    public synchronized boolean isConnected() {
-        return firestore != null && (lastError == null || lastError.isBlank());
     }
 
     public synchronized Firestore getFirestore() {

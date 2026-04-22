@@ -40,3 +40,4 @@ build/
 
 ### Local secrets ###
 config/*.json
+/src/main/java/firebase_info/

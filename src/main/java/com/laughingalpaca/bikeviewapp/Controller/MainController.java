@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,18 +26,20 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class MainController implements Initializable {
+
+    //PANES
     public TabPane mainTabPane;
     public Tab mapViewTab;
     public AnchorPane mapViewPane;
     public StackPane mapPane;
-    public Tab settingsTab;
     public Pane stationInfoPane;
+
+    //LABELS
     public Label filterMapByLabel;
     public Label boroughLabel;
     public Label zipLabel;
     public Label stationLabel;
     public Label minBikeCountLabel;
-    public Label databaseIpLabel;
     public Label stationIdLabel;
     public Label stationNameLabel;
     public Label stationLatitudeLabel;
@@ -47,21 +50,30 @@ public class MainController implements Initializable {
     public Label stationLatitude;
     public Label stationLongitude;
     public Label stationBikeCount;
+
+    //CHOICES
     public ChoiceBox<String> boroughChoiceBox;
     public CheckBox zipCodeCheckBox;
     public CheckBox boroughCheckBox;
     public CheckBox stationCheckBox;
     public CheckBox bikeCountCheckBox;
-    public TextField zipCodeTextField;
     public ChoiceBox<String> stationChoiceBox;
     public Slider minBikeCountSlider;
+
+
+    //TEXT FIELDS
     public TextArea infoTextArea;
-    public TextField databaseNameTextField;
-    public TextField databaseIpTextField;
+    public TextField zipCodeTextField;
+
+
+    //BUTTONS
     public Button showResultsButton;
-    public Button refreshDatabaseStatusButton;
+
+
+    //INFO
     private final DataHandler dataHandler = DataHandler.getInstance();
     private List<Station> allStations = new ArrayList<>();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initializeSlider();
@@ -69,6 +81,7 @@ public class MainController implements Initializable {
         initializeFilterState();
         loadInitialData();
     }
+
     private void initializeSlider() {
         minBikeCountSlider.setMin(0);
         minBikeCountSlider.setMax(100);
@@ -77,15 +90,16 @@ public class MainController implements Initializable {
         minBikeCountSlider.setBlockIncrement(1);
         minBikeCountSlider.setValue(0);
     }
+
     private void loadInitialData() {
         allStations = dataHandler.getAllStations();
-        refreshDatabaseStatus();
         initializeChoiceBoxes();
         updateSliderRange();
         initializeMapView(allStations);
         mapViewPane.setDisable(false);
         updateInfoPanel(allStations);
     }
+
     private void initializeEventHandlers() {
 
         zipCodeCheckBox.setDisable(true);
@@ -116,8 +130,8 @@ public class MainController implements Initializable {
             }
         });
         showResultsButton.setOnAction(event -> applyFilters());
-        refreshDatabaseStatusButton.setOnAction(event -> loadInitialData());
     }
+
     private void initializeFilterState() {
         zipCodeCheckBox.setSelected(false);
         boroughCheckBox.setSelected(false);
@@ -130,6 +144,7 @@ public class MainController implements Initializable {
         minBikeCountLabel.setDisable(true);
         minBikeCountSlider.setDisable(true);
     }
+
     private void initializeChoiceBoxes() {
         boroughChoiceBox.getItems().setAll(allStations.stream()
                 .map(Station::getBorough)
@@ -143,6 +158,7 @@ public class MainController implements Initializable {
                 .sorted(String.CASE_INSENSITIVE_ORDER)
                 .toList());
     }
+
     private void updateSliderRange() {
         int maxBikeCount = allStations.stream()
                 .mapToInt(Station::getEstimated_bike_count)
@@ -151,6 +167,7 @@ public class MainController implements Initializable {
         minBikeCountSlider.setMax(Math.max(maxBikeCount, 10));
         minBikeCountSlider.setMajorTickUnit(Math.max(5, Math.ceil(maxBikeCount / 5.0)));
     }
+
     private void applyFilters() {
         List<Station> filteredStations = allStations.stream()
                 .filter(this::matchesBorough)
@@ -167,22 +184,21 @@ public class MainController implements Initializable {
         }
         return boroughChoiceBox.getValue().equalsIgnoreCase(station.getBorough());
     }
+
     private boolean matchesStation(Station station) {
         if (!stationCheckBox.isSelected() || stationChoiceBox.getValue() == null) {
             return true;
         }
         return stationChoiceBox.getValue().equalsIgnoreCase(station.getStation_name());
     }
+
     private boolean matchesBikeCount(Station station) {
         if (!bikeCountCheckBox.isSelected()) {
             return true;
         }
         return station.getEstimated_bike_count() >= Math.round(minBikeCountSlider.getValue());
     }
-    private void refreshDatabaseStatus() {
-        databaseNameTextField.setText(dataHandler.getDatabaseDisplayName());
-        databaseIpTextField.setText(dataHandler.getDatabaseHostDisplay());
-    }
+
     private void updateInfoPanel(List<Station> stations) {
         StringBuilder builder = new StringBuilder();
         builder.append("Source: ").append(dataHandler.getDatabaseDisplayName()).append('\n');
@@ -194,6 +210,7 @@ public class MainController implements Initializable {
         builder.append("ZIP filtering is enabled in Layer 4.");
         infoTextArea.setText(builder.toString());
     }
+
     private void initializeMapView(List<Station> stationsList) {
         mapPane.getChildren().clear();
         stationInfoPane.setVisible(false);
@@ -213,6 +230,7 @@ public class MainController implements Initializable {
         }
         mapPane.getChildren().add(mapView);
     }
+
     private MapPoint resolveMapCenter(List<Station> stationsList) {
         if (stationsList.isEmpty()) {
             return new MapPoint(40.776676, -73.971321);
