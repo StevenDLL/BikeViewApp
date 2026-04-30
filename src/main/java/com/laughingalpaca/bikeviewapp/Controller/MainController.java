@@ -97,7 +97,6 @@ public class MainController implements Initializable {
 
     private void loadInitialData() {
         allStations = dataHandler.getAllStations();
-        refreshDatabaseStatus();
         initializeChoiceBoxes();
         updateSliderRange();
         initializeMapView(allStations, null);
@@ -143,14 +142,14 @@ public class MainController implements Initializable {
         });
 
         showResultsButton.setOnAction(event -> applyFilters());
-        refreshDatabaseStatusButton.setOnAction(event -> {
-            allStations = dataHandler.getAllStations();
-            refreshDatabaseStatus();
-            initializeChoiceBoxes();
-            updateSliderRange();
-            initializeMapView(allStations, null);
-            updateInfoPanel(allStations, null);
-        });
+//        refreshDatabaseStatusButton.setOnAction(event -> {
+//            allStations = dataHandler.getAllStations();
+//            refreshDatabaseStatus();
+//            initializeChoiceBoxes();
+//            updateSliderRange();
+//            initializeMapView(allStations, null);
+//            updateInfoPanel(allStations, null);
+//        });
     }
 
     private void initializeFilterState() {
