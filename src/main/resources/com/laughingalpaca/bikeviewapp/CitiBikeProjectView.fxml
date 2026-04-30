@@ -1,59 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
-<TabPane fx:id="mainTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" tabClosingPolicy="UNAVAILABLE" styleClass="main-tab-pane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laughingalpaca.bikeviewapp.Controller.MainController">
+<TabPane fx:id="mainTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="main-tab-pane" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laughingalpaca.bikeviewapp.Controller.MainController">
     <Tab fx:id="mapViewTab" text="MAP">
         <AnchorPane fx:id="mapViewPane" disable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 
             <!-- This is for the sidebar with all the filters, i changed the old fxml so this one can use the css style -->
-            <Pane layoutX="1100.0" layoutY="0.0" prefHeight="720.0" prefWidth="180.0" styleClass="sidebar-pane"/>
+            <Pane layoutX="1100.0" layoutY="0.0" prefHeight="720.0" prefWidth="180.0" styleClass="sidebar-pane" />
 
-            <Label fx:id="filterMapByLabel" layoutX="1115.0" layoutY="259.0" text="FILTER MAP BY:" styleClass="sidebar-label-header"/>
-            <Label fx:id="boroughLabel" disable="true" layoutX="1107.0" layoutY="458.0" text="Borough:" styleClass="sidebar-label"/>
-            <Button fx:id="showResultsButton" layoutX="1108.0" layoutY="634.0" mnemonicParsing="false" text="SHOW RESULTS" textAlignment="CENTER" prefWidth="165.0" styleClass="sidebar-button"/>
-            <ChoiceBox fx:id="boroughChoiceBox" disable="true" layoutX="1107.0" layoutY="478.0" prefHeight="25.0" prefWidth="166.0" styleClass="sidebar-choicebox"/>
-            <CheckBox fx:id="zipCodeCheckBox" layoutX="1106.0" layoutY="287.0" mnemonicParsing="false" text="ZIPCODE" styleClass="sidebar-checkbox"/>
-            <CheckBox fx:id="boroughCheckBox" layoutX="1106.0" layoutY="312.0" mnemonicParsing="false" text="BOROUGH" styleClass="sidebar-checkbox"/>
-            <CheckBox fx:id="stationCheckBox" layoutX="1106.0" layoutY="337.0" mnemonicParsing="false" text="STATION" styleClass="sidebar-checkbox"/>
-            <CheckBox fx:id="bikeCountCheckBox" layoutX="1106.0" layoutY="363.0" mnemonicParsing="false" text="BIKE COUNT" styleClass="sidebar-checkbox"/>
-            <TextField fx:id="zipCodeTextField" disable="true" layoutX="1108.0" layoutY="424.0" prefHeight="25.0" prefWidth="165.0" styleClass="sidebar-textfield"/>
-            <Label fx:id="zipLabel" disable="true" layoutX="1110.0" layoutY="404.0" text="Zipcode:" styleClass="sidebar-label"/>
-            <Label fx:id="stationLabel" disable="true" layoutX="1107.0" layoutY="514.0" text="Station:" styleClass="sidebar-label"/>
-            <ChoiceBox fx:id="stationChoiceBox" disable="true" layoutX="1107.0" layoutY="534.0" prefHeight="25.0" prefWidth="166.0" styleClass="sidebar-choicebox"/>
-            <Slider fx:id="minBikeCountSlider" disable="true" layoutX="1107.0" layoutY="588.0" prefHeight="34.0" prefWidth="165.0" showTickLabels="true" snapToTicks="true" styleClass="sidebar-slider"/>
-            <Label fx:id="minBikeCountLabel" disable="true" layoutX="1107.0" layoutY="569.0" text="Minimum Bike Count" styleClass="sidebar-label"/>
-            <TextArea fx:id="infoTextArea" editable="false" layoutX="1110.0" layoutY="14.0" prefHeight="239.0" prefWidth="164.0" text="By default this program will use the lastest available data that CitiBike provides to the public. If you are looking to change which data is used check out the SETTINGS tab. &#10;&#10;&#10;&#10;&#10;Check Settings for Database status." wrapText="true" styleClass="sidebar-textarea"/>
+            <Label fx:id="filterMapByLabel" layoutX="1115.0" layoutY="259.0" styleClass="sidebar-label-header" text="FILTER MAP BY:" />
+            <Label fx:id="boroughLabel" disable="true" layoutX="1107.0" layoutY="458.0" styleClass="sidebar-label" text="Borough:" />
+            <Button fx:id="showResultsButton" layoutX="1108.0" layoutY="634.0" mnemonicParsing="false" prefWidth="165.0" styleClass="sidebar-button" text="SHOW RESULTS" textAlignment="CENTER" />
+            <ChoiceBox fx:id="boroughChoiceBox" disable="true" layoutX="1107.0" layoutY="478.0" prefHeight="25.0" prefWidth="166.0" styleClass="sidebar-choicebox" />
+            <CheckBox fx:id="zipCodeCheckBox" layoutX="1106.0" layoutY="287.0" mnemonicParsing="false" styleClass="sidebar-checkbox" text="ZIPCODE" />
+            <CheckBox fx:id="boroughCheckBox" layoutX="1106.0" layoutY="312.0" mnemonicParsing="false" styleClass="sidebar-checkbox" text="BOROUGH" />
+            <CheckBox fx:id="stationCheckBox" layoutX="1106.0" layoutY="337.0" mnemonicParsing="false" styleClass="sidebar-checkbox" text="STATION" />
+            <CheckBox fx:id="bikeCountCheckBox" layoutX="1106.0" layoutY="363.0" mnemonicParsing="false" styleClass="sidebar-checkbox" text="BIKE COUNT" />
+            <TextField fx:id="zipCodeTextField" disable="true" layoutX="1108.0" layoutY="424.0" prefHeight="25.0" prefWidth="165.0" styleClass="sidebar-textfield" />
+            <Label fx:id="zipLabel" disable="true" layoutX="1110.0" layoutY="404.0" styleClass="sidebar-label" text="Zipcode:" />
+            <Label fx:id="stationLabel" disable="true" layoutX="1107.0" layoutY="514.0" styleClass="sidebar-label" text="Station:" />
+            <ChoiceBox fx:id="stationChoiceBox" disable="true" layoutX="1107.0" layoutY="534.0" prefHeight="25.0" prefWidth="166.0" styleClass="sidebar-choicebox" />
+            <Slider fx:id="minBikeCountSlider" disable="true" layoutX="1107.0" layoutY="588.0" prefHeight="34.0" prefWidth="165.0" showTickLabels="true" snapToTicks="true" styleClass="sidebar-slider" />
+            <Label fx:id="minBikeCountLabel" disable="true" layoutX="1107.0" layoutY="569.0" styleClass="sidebar-label" text="Minimum Bike Count" />
+            <TextArea fx:id="infoTextArea" editable="false" layoutX="1110.0" layoutY="14.0" prefHeight="239.0" prefWidth="164.0" styleClass="sidebar-textarea" text="By default this program will use the lastest available data that CitiBike provides to the public. If you are looking to change which data is used check out the SETTINGS tab. &#10;&#10;&#10;&#10;&#10;Check Settings for Database status." wrapText="true" />
             <StackPane fx:id="mapPane" prefHeight="698.0" prefWidth="1101.0" />
-            <Pane fx:id="stationInfoPane" layoutX="860.0" layoutY="14.0" prefHeight="222.0" prefWidth="230.0"
-                  styleClass="station-card" visible="false">
+            <Pane fx:id="stationInfoPane" layoutX="860.0" layoutY="14.0" prefHeight="222.0" prefWidth="230.0" styleClass="station-card" visible="false">
 
-                <Pane layoutX="0" layoutY="0" prefWidth="230.0" prefHeight="36.0" styleClass="station-card-accent">
-                    <Label layoutX="12.0" layoutY="9.0" text="STATION INFO" styleClass="station-card-header-label"/>
+                <Pane layoutX="0" layoutY="0" prefHeight="36.0" prefWidth="230.0" styleClass="station-card-accent">
+                    <Label layoutX="12.0" layoutY="9.0" styleClass="station-card-header-label" text="STATION INFO" />
                 </Pane>
 
-                <Label fx:id="stationIdLabel"   layoutX="16.0" layoutY="44.0"  text="ID"           styleClass="station-field-label"/>
-                <Label fx:id="stationId"        layoutX="16.0" layoutY="56.0"  text="—"            styleClass="station-field-value"/>
+                <Label fx:id="stationIdLabel" layoutX="16.0" layoutY="44.0" styleClass="station-field-label" text="ID" />
+                <Label fx:id="stationId" layoutX="16.0" layoutY="56.0" styleClass="station-field-value" text="—" />
 
-                <Pane layoutX="16.0" layoutY="76.0" prefWidth="198.0" prefHeight="1.0" styleClass="station-divider"/>
+                <Pane layoutX="16.0" layoutY="76.0" prefHeight="1.0" prefWidth="198.0" styleClass="station-divider" />
 
-                <Label fx:id="stationNameLabel" layoutX="16.0" layoutY="82.0"  text="STATION NAME" styleClass="station-field-label"/>
-                <Label fx:id="stationName"      layoutX="16.0" layoutY="94.0"  text="—"            styleClass="station-field-value" prefWidth="198.0"/>
+                <Label fx:id="stationNameLabel" layoutX="16.0" layoutY="82.0" styleClass="station-field-label" text="STATION NAME" />
+                <Label fx:id="stationName" layoutX="16.0" layoutY="94.0" prefWidth="198.0" styleClass="station-field-value" text="—" />
 
-                <Pane layoutX="16.0" layoutY="116.0" prefWidth="198.0" prefHeight="1.0" styleClass="station-divider"/>
+                <Pane layoutX="16.0" layoutY="116.0" prefHeight="1.0" prefWidth="198.0" styleClass="station-divider" />
 
-                <Label fx:id="stationLatitudeLabel"  layoutX="16.0"  layoutY="122.0" text="LAT" styleClass="station-field-label"/>
-                <Label fx:id="stationLatitude"       layoutX="16.0"  layoutY="134.0" text="—"   styleClass="station-field-secondary"/>
-                <Label fx:id="stationLongitudeLabel" layoutX="120.0" layoutY="122.0" text="LON" styleClass="station-field-label"/>
-                <Label fx:id="stationLongitude"      layoutX="120.0" layoutY="134.0" text="—"   styleClass="station-field-secondary"/>
+                <Label fx:id="stationLatitudeLabel" layoutX="16.0" layoutY="122.0" styleClass="station-field-label" text="LAT" />
+                <Label fx:id="stationLatitude" layoutX="16.0" layoutY="134.0" styleClass="station-field-secondary" text="—" />
+                <Label fx:id="stationLongitudeLabel" layoutX="120.0" layoutY="122.0" styleClass="station-field-label" text="LON" />
+                <Label fx:id="stationLongitude" layoutX="120.0" layoutY="134.0" styleClass="station-field-secondary" text="—" />
 
-                <Pane layoutX="16.0" layoutY="156.0" prefWidth="198.0" prefHeight="1.0" styleClass="station-divider"/>
+                <Pane layoutX="16.0" layoutY="156.0" prefHeight="1.0" prefWidth="198.0" styleClass="station-divider" />
 
-                <Label fx:id="stationBikeCountLabel" layoutX="16.0" layoutY="162.0" text="BIKES AVAILABLE" styleClass="station-field-label"/>
-                <Label fx:id="stationBikeCount"      layoutX="14.0" layoutY="175.0" text="—"               styleClass="station-bike-count"/>
+                <Label fx:id="stationBikeCountLabel" layoutX="16.0" layoutY="162.0" styleClass="station-field-label" text="BIKES AVAILABLE" />
+                <Label fx:id="stationBikeCount" layoutX="14.0" layoutY="175.0" styleClass="station-bike-count" text="—" />
             </Pane>
+         <Label fx:id="bikeCountNumber" disable="true" layoutX="1245.0" layoutY="570.0" styleClass="sidebar-label" text="000" />
         </AnchorPane>
     </Tab>
 
@@ -88,9 +98,7 @@
                 </font>
             </Button>
 
-            <TextArea editable="false" layoutX="1110.0" layoutY="14.0" prefHeight="239.0" prefWidth="164.0"
-                      text="Select a start and end station to draw a route line on the map.&#10;&#10;This shows the straight-line path between any two Citi Bike stations."
-                      wrapText="true">
+            <TextArea editable="false" layoutX="1110.0" layoutY="14.0" prefHeight="239.0" prefWidth="164.0" text="Select a start and end station to draw a route line on the map.&#10;&#10;This shows the straight-line path between any two Citi Bike stations." wrapText="true">
                 <font>
                     <Font name="Arial Bold" size="12.0" />
                 </font>
