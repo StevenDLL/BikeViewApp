@@ -294,3 +294,95 @@ public class MainController implements Initializable {
                 && stationChoiceBox.getValue() != null
                 && !stationChoiceBox.getValue().isBlank();
     }
+
+    private String buildFilterSummary(GeoBoundary zipBoundary) {
+        List<String> activeFilters = new ArrayList<>();
+        if (hasActiveZipFilter()) {
+            String zip = zipCodeTextField.getText().trim();
+            activeFilters.add(zipBoundary == null ? "ZIP " + zip + " (not found)" : "ZIP " + zip);
+        }
+        if (hasActiveBoroughFilter()) {
+            activeFilters.add("Borough " + boroughChoiceBox.getValue());
+        }
+        if (hasActiveStationFilter()) {
+            activeFilters.add("Station " + stationChoiceBox.getValue());
+        }
+        if (bikeCountCheckBox.isSelected()) {
+            activeFilters.add("Min Bikes " + Math.round(minBikeCountSlider.getValue()));
+        }
+        if (activeFilters.isEmpty()) {
+            return "All stations";
+        }
+        return String.join(", ", activeFilters);
+    }
+
+    private void initializeMapView(List<Station> stationsList, GeoBoundary zipBoundary) {
+        mapPane.getChildren().clear();
+        stationInfoPane.setVisible(false);
+
+        MapView mapView = new MapView();
+        mapView.setCenter(resolveMapCenter(stationsList, zipBoundary));
+        mapView.setZoom(resolveZoomLevel(stationsList, zipBoundary));
+
+        Label[] labels = {
+                stationId,
+                stationName,
+                stationLatitude,
+                stationLongitude,
+                stationBikeCount,
+        };
+
+        if (zipBoundary != null) {
+            mapView.addLayer(new BoundaryMapLayer(zipBoundary));
+        }
+        if (!stationsList.isEmpty()) {
+            StationMapLayer stationMapLayer = new StationMapLayer(stationsList, stationInfoPane, labels);
+            mapView.addLayer(stationMapLayer);
+        }
+
+        mapPane.getChildren().add(mapView);
+    }
+
+    private MapPoint resolveMapCenter(List<Station> stationsList, GeoBoundary zipBoundary) {
+        if (zipBoundary != null) {
+            return zipBoundary.getCenter();
+        }
+        if (stationsList.isEmpty()) {
+            return new MapPoint(40.776676, -73.971321);
+        }
+
+        double averageLatitude = stationsList.stream()
+                .mapToDouble(station -> station.getLocation().getLatitude())
+                .average()
+                .orElse(40.776676);
+        double averageLongitude = stationsList.stream()
+                .mapToDouble(station -> station.getLocation().getLongitude())
+                .average()
+                .orElse(-73.971321);
+
+        return new MapPoint(averageLatitude, averageLongitude);
+    }
+
+    private int resolveZoomLevel(List<Station> stationsList, GeoBoundary zipBoundary) {
+        if (zipBoundary != null) {
+            double maxSpan = Math.max(zipBoundary.getLatitudeSpan(), zipBoundary.getLongitudeSpan());
+            if (maxSpan > 0.25) {
+                return 11;
+            }
+            if (maxSpan > 0.12) {
+                return 12;
+            }
+            if (maxSpan > 0.06) {
+                return 13;
+            }
+            if (maxSpan > 0.03) {
+                return 14;
+            }
+            if (maxSpan > 0.015) {
+                return 15;
+            }
+            return 16;
+        }
+        return stationsList.isEmpty() ? 11 : 12;
+    }
+}
