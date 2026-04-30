@@ -8,13 +8,10 @@ import javafx.stage.StageStyle;
 
 public class AppEntry extends Application {
 
-    DataHandler appDataHandler;
 
-    //TODO: Use this class to handle all data related things. Connect to the db here, query the db here,
     @Override
     public void init() throws Exception {
-        appDataHandler = new DataHandler();
-        super.init();
+        DataHandler.getInstance().refreshConnectionStatus();
     }
 
     @Override
