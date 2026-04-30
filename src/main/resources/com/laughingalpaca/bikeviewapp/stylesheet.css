@@ -151,7 +151,7 @@
 }
 
 .sidebar-choicebox .label {
-    -fx-text-fill: white;
+    -fx-text-fill: #625bb2;
     -fx-font-family: Arial;
     -fx-font-size: 12px;
 }
@@ -271,4 +271,32 @@
     -fx-text-fill: rgba(255,255,255,0.45);
     -fx-font-family: Arial;
     -fx-font-size: 13;
+}
+
+.choice-box .context-menu {
+    -fx-background-color: #1c1a3a;
+}
+
+.choice-box .menu-item {
+    -fx-background-color: #1c1a3a;
+}
+
+.choice-box .menu-item .label {
+    -fx-text-fill: white;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: #625bb2;
+}
+
+.choice-box .menu-item:focused .label {
+    -fx-text-fill: white;
+}
+
+.choice-box .menu-item:hover {
+    -fx-background-color: #625bb2;
+}
+
+.choice-box .menu-item:hover .label {
+    -fx-text-fill: white;
 }
