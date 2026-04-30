@@ -40,4 +40,5 @@ build/
 
 ### Local secrets ###
 config/*.json
-/src/main/java/firebase_info/
+/src/main/resources/com/laughingalpaca/bikeviewapp/firebase_info/
+/src/main/resources/com/laughingalpaca/bikeviewapp/firebase_info/
