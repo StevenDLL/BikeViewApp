@@ -50,6 +50,8 @@ public class MainController implements Initializable {
     public Label stationLatitude;
     public Label stationLongitude;
     public Label stationBikeCount;
+    public Label bikeCountNumber;
+
 
     //CHOICES
     public ChoiceBox<String> boroughChoiceBox;
@@ -80,15 +82,19 @@ public class MainController implements Initializable {
         initializeEventHandlers();
         initializeFilterState();
         loadInitialData();
+
+        bikeCountNumber.textProperty().bind(minBikeCountSlider.valueProperty().asString());
     }
 
     private void initializeSlider() {
         minBikeCountSlider.setMin(0);
-        minBikeCountSlider.setMax(100);
+        minBikeCountSlider.setMax(150);
         minBikeCountSlider.setMajorTickUnit(20);
-        minBikeCountSlider.setMinorTickCount(3);
-        minBikeCountSlider.setBlockIncrement(1);
+        minBikeCountSlider.setMinorTickCount(1);
+        //minBikeCountSlider.setBlockIncrement(1);
         minBikeCountSlider.setValue(0);
+        minBikeCountSlider.setSnapToTicks(true);
+        minBikeCountSlider.setShowTickMarks(true);
     }
 
     private void loadInitialData() {
@@ -165,7 +171,7 @@ public class MainController implements Initializable {
                 .max()
                 .orElse(100);
         minBikeCountSlider.setMax(Math.max(maxBikeCount, 10));
-        minBikeCountSlider.setMajorTickUnit(Math.max(5, Math.ceil(maxBikeCount / 5.0)));
+        minBikeCountSlider.setMajorTickUnit(Math.max(5, Math.ceil(maxBikeCount / 20.0)));
     }
 
     private void applyFilters() {
