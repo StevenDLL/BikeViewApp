@@ -10,9 +10,9 @@ import com.google.cloud.firestore.QuerySnapshot;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import com.laughingalpaca.bikeviewapp.Model.Station;
 import com.laughingalpaca.bikeviewapp.Model.Ride;
 import com.laughingalpaca.bikeviewapp.Model.RideableType;
-import com.laughingalpaca.bikeviewapp.Model.Station;
 
 import java.io.FileInputStream;
 import java.io.IOException;
