@@ -6,63 +6,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="appPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="555.0" prefWidth="375.0" styleClass="launcher-pane"
-      xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.laughingalpaca.bikeviewapp.Controller.AppLauncherController">
+<Pane fx:id="appPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="555.0" prefWidth="375.0" styleClass="launcher-pane" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.laughingalpaca.bikeviewapp.Controller.AppLauncherController">
 
     <Pane fx:id="appLoginPane" prefHeight="555.0" prefWidth="375.0">
 
-        <Pane fx:id="appIconHolder" layoutX="107.0" layoutY="42.0" prefHeight="160.0" prefWidth="160.0"
-              styleClass="launcher-icon-holder">
-            <ImageView fx:id="appIcon" fitHeight="150.0" fitWidth="150.0"
-                       layoutX="5.0" layoutY="5.0"
-                       pickOnBounds="true" preserveRatio="true">
+        <Pane fx:id="appIconHolder" layoutX="107.0" layoutY="42.0" prefHeight="160.0" prefWidth="160.0" styleClass="launcher-icon-holder">
+            <ImageView fx:id="appIcon" fitHeight="150.0" fitWidth="150.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@Images/bike.png" />
             </ImageView>
         </Pane>
 
-        <Label layoutX="0" layoutY="218.0" prefWidth="375.0"
-               text="Bike View App" textFill="WHITE"
-               textAlignment="CENTER" alignment="CENTER"
-               styleClass="launcher-title"/>
+        <Label alignment="CENTER" layoutX="0" layoutY="218.0" prefWidth="375.0" styleClass="launcher-title" text="Bike View App" textAlignment="CENTER" textFill="WHITE" />
 
-        <Label layoutX="0" layoutY="266.0" prefWidth="375.0"
-               text="NEW YORK CITY  •  CITI BIKE"
-               textAlignment="CENTER" alignment="CENTER"
-               styleClass="launcher-tagline"/>
+        <Label alignment="CENTER" layoutX="0" layoutY="266.0" prefWidth="375.0" styleClass="launcher-tagline" text="NEW YORK CITY  •  CITI BIKE" textAlignment="CENTER" />
 
-        <Pane layoutX="137.0" layoutY="288.0" prefWidth="100.0" prefHeight="1.0"
-              styleClass="launcher-divider"/>
+        <Pane layoutX="137.0" layoutY="288.0" prefHeight="1.0" prefWidth="100.0" styleClass="launcher-divider" />
 
-        <Text fill="rgba(255,255,255,0.7)" fontSmoothingType="LCD"
-              layoutX="55.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0"
-              text="Track bike stations across New York City using the latest released data by Citi Bike."
-              textAlignment="CENTER" wrappingWidth="265.0">
+        <Text fill="rgba(255,255,255,0.7)" fontSmoothingType="LCD" layoutX="55.0" layoutY="322.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Track bike stations across New York City using the latest released data by Citi Bike." textAlignment="CENTER" wrappingWidth="265.0">
             <font>
                 <Font name="System Italic" size="13.0" />
             </font>
         </Text>
 
-        <Button fx:id="launchMapButton" layoutX="40.0" layoutY="410.0"
-                mnemonicParsing="false" prefHeight="50.0" prefWidth="295.0"
-                text="Launch Map" textAlignment="CENTER"
-                styleClass="launcher-button">
+        <Button fx:id="launchMapButton" layoutX="40.0" layoutY="410.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="295.0" styleClass="launcher-button" text="Launch Map" textAlignment="CENTER">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
 
-        <Pane layoutX="0" layoutY="508.0" prefWidth="375.0" prefHeight="1.0"
-              styleClass="launcher-bottom-strip"/>
+        <Pane layoutX="0" layoutY="508.0" prefHeight="1.0" prefWidth="375.0" styleClass="launcher-bottom-strip" />
 
-        <Label layoutX="14.0" layoutY="518.0" text="Last Updated:"
-               styleClass="launcher-footer-label"/>
-        <Label fx:id="lastUpdatedDateLabel" layoutX="122.0" layoutY="518.0" text="00/00/0000"
-               styleClass="launcher-footer-value"/>
+        <Label layoutX="14.0" layoutY="518.0" styleClass="launcher-footer-label" text="Last Updated:" />
+        <Label fx:id="lastUpdatedDateLabel" layoutX="122.0" layoutY="518.0" styleClass="launcher-footer-value" text="05/07/2026" />
 
-        <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="334.0" layoutY="517.0"
-                   pickOnBounds="true" preserveRatio="true" opacity="0.5">
+        <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="334.0" layoutY="517.0" onMouseClicked="#githubClicked" opacity="0.5" pickOnBounds="true" preserveRatio="true">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
