@@ -48,7 +48,6 @@ public class MainController implements Initializable {
     public Label zipLabel;
     public Label stationLabel;
     public Label minBikeCountLabel;
-    public Label databaseIpLabel;
     public Label stationIdLabel;
     public Label stationNameLabel;
     public Label stationLatitudeLabel;
@@ -72,8 +71,13 @@ public class MainController implements Initializable {
     public TextField databaseNameTextField;
     public TextField databaseIpTextField;
 
+    public Tab routesTab;
+    public StackPane routesMapPane;
+    public ChoiceBox<String> startStationChoiceBox;
+    public ChoiceBox<String> endStationChoiceBox;
+    public Button showRouteButton;
+
     public Button showResultsButton;
-    public Button refreshDatabaseStatusButton;
 
     private final DataHandler dataHandler = DataHandler.getInstance();
     private List<Station> allStations = new ArrayList<>();
@@ -100,8 +104,36 @@ public class MainController implements Initializable {
         initializeChoiceBoxes();
         updateSliderRange();
         initializeMapView(allStations, null);
+        initializeRoutesView(allStations, null);
         mapViewPane.setDisable(false);
         updateInfoPanel(allStations, null);
+    }
+
+    private void initializeRoutesView(List<Station> stationsList, GeoBoundary zipBoundary) {
+        routesMapPane.getChildren().clear();
+        stationInfoPane.setVisible(false);
+
+        MapView mapView = new MapView();
+        mapView.setCenter(resolveMapCenter(stationsList, zipBoundary));
+        mapView.setZoom(resolveZoomLevel(stationsList, zipBoundary));
+
+        Label[] labels = {
+                stationId,
+                stationName,
+                stationLatitude,
+                stationLongitude,
+                stationBikeCount,
+        };
+
+        if (zipBoundary != null) {
+            mapView.addLayer(new BoundaryMapLayer(zipBoundary));
+        }
+        if (!stationsList.isEmpty()) {
+            StationMapLayer stationMapLayer = new StationMapLayer(stationsList);
+            mapView.addLayer(stationMapLayer);
+        }
+
+        routesMapPane.getChildren().add(mapView);
     }
 
     private void initializeEventHandlers() {
@@ -142,14 +174,6 @@ public class MainController implements Initializable {
         });
 
         showResultsButton.setOnAction(event -> applyFilters());
-//        refreshDatabaseStatusButton.setOnAction(event -> {
-//            allStations = dataHandler.getAllStations();
-//            refreshDatabaseStatus();
-//            initializeChoiceBoxes();
-//            updateSliderRange();
-//            initializeMapView(allStations, null);
-//            updateInfoPanel(allStations, null);
-//        });
     }
 
     private void initializeFilterState() {
