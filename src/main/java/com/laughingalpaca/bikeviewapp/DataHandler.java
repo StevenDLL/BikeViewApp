@@ -32,7 +32,11 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 public class DataHandler {
-    private static final Path SERVICE_ACCOUNT_PATH = Path.of("config", ".../BikeViewApp/src/main/resources/firebase_info/bikeviewappKey.json");
+    private static final List<Path> SERVICE_ACCOUNT_PATHS = List.of(
+            Path.of("config", "firebase-service-account.json"),
+            Path.of("config", "firebase_info", "bikeviewappKey.json"),
+            Path.of("config", "csc325--citibikeapp-firebase-adminsdk-fbsvc-af39f79319.json")
+    );
     private static final DateTimeFormatter DISPLAY_DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a").withZone(ZoneId.systemDefault());
     private static final DataHandler INSTANCE = new DataHandler();
     private final List<Station> cachedStations = new ArrayList<>();
@@ -215,11 +219,12 @@ public class DataHandler {
     }
 
     private Firestore initializeFirestore() {
-        if (!Files.exists(SERVICE_ACCOUNT_PATH)) {
-            lastError = "Missing Firebase key at " + SERVICE_ACCOUNT_PATH;
+        Path serviceAccountPath = resolveServiceAccountPath();
+        if (serviceAccountPath == null) {
+            lastError = "Missing Firebase key. Checked: " + SERVICE_ACCOUNT_PATHS;
             return null;
         }
-        try (FileInputStream inputStream = new FileInputStream(SERVICE_ACCOUNT_PATH.toFile())) {
+        try (FileInputStream inputStream = new FileInputStream(serviceAccountPath.toFile())) {
             ServiceAccountCredentials credentials = ServiceAccountCredentials.fromStream(inputStream);
             projectId = credentials.getProjectId() == null || credentials.getProjectId().isBlank()
                     ? projectId
@@ -239,6 +244,13 @@ public class DataHandler {
             lastError = buildReadableError("Unable to initialize Firebase.", exception);
             return null;
         }
+    }
+
+    private Path resolveServiceAccountPath() {
+        return SERVICE_ACCOUNT_PATHS.stream()
+                .filter(Files::exists)
+                .findFirst()
+                .orElse(null);
     }
 
     private Optional<Instant> getMetadataLastUpdated() {
