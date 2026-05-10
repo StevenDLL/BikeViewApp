@@ -41,7 +41,7 @@ public class DataHandler {
             Path.of("config", "firebase-service-account.json"),
             Path.of("config", "firebase_info", "bikeviewappKey.json"),
             Path.of("config", "csc325--citibikeapp-firebase-adminsdk-fbsvc-af39f79319.json"),
-            Path.of("src", "main", "resources", "com", "laughingalpaca", "bikeviewapp", "firebase_info", "bikeviewappKey.json");
+            Path.of("src", "main", "resources", "com", "laughingalpaca", "bikeviewapp", "firebase_info", "bikeviewappKey.json")
     );
     private static final DateTimeFormatter DISPLAY_DATE_FORMAT = DateTimeFormatter.ofPattern("MM/dd/yyyy hh:mm a").withZone(ZoneId.systemDefault());
     private static final DataHandler INSTANCE = new DataHandler();

@@ -1,6 +1,7 @@
 package com.laughingalpaca.bikeviewapp.View;
 
 import com.laughingalpaca.bikeviewapp.DataHandler;
+import com.laughingalpaca.bikeviewapp.FirestoreSeeder;
 import com.laughingalpaca.bikeviewapp.SceneManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -16,7 +17,6 @@ public class AppEntry extends Application {
 
     @Override
     public void start(Stage stage) {
-
         stage.setTitle("Citi Bike Viewing App");
         stage.setResizable(false);
         stage.initStyle(StageStyle.UNIFIED);
