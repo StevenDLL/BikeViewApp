@@ -1,5 +1,11 @@
 Information about our project here...
 
+## Demo Security Notes
+
+This project can use a local Firebase Admin service-account JSON for class/demo runs. Keep those files under `config/` and never commit them. A production desktop release should move Firebase access behind a backend API, or use Firebase client authentication with Firestore security rules.
+
+For demo credentials, use least-privilege access limited to the app's station sync data. The intended write path is `FirestoreSeeder`, which writes `stations/{stationId}` and `app_metadata/status` from the live GBFS station feed.
+
 Launch<br>
 <img width="377" height="587" alt="Launch" src="https://github.com/user-attachments/assets/817c7d36-7068-4fb5-bc2d-e7c53a80c3d4" />
 

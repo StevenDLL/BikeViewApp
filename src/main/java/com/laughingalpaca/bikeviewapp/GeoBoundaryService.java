@@ -12,13 +12,18 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class GeoBoundaryService {
+    private static final Duration REQUEST_TIMEOUT = Duration.ofSeconds(10);
+    private static final int MAX_JSON_RESPONSE_BYTES = 10 * 1024 * 1024;
+    private static final Pattern ZIP_CODE_PATTERN = Pattern.compile("\\d{5}");
     private static final String BOROUGH_BOUNDARIES_URL =
             "https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/State_County/MapServer/9/query"
                     + "?where=STATE%20%3D%20'36'%20AND%20COUNTY%20IN%20('005','047','061','081','085')"
@@ -32,7 +37,9 @@ public class GeoBoundaryService {
     private final Map<String, Optional<GeoBoundary>> zipBoundaryCache = new HashMap<>();
 
     public GeoBoundaryService() {
-        httpClient = HttpClient.newHttpClient();
+        httpClient = HttpClient.newBuilder()
+                .connectTimeout(REQUEST_TIMEOUT)
+                .build();
         objectMapper = new ObjectMapper();
     }
 
@@ -55,6 +62,9 @@ public class GeoBoundaryService {
             return Optional.empty();
         }
         String normalizedZip = zipCode.trim();
+        if (!ZIP_CODE_PATTERN.matcher(normalizedZip).matches()) {
+            return Optional.empty();
+        }
         if (zipBoundaryCache.containsKey(normalizedZip)) {
             return zipBoundaryCache.get(normalizedZip);
         }
@@ -109,13 +119,17 @@ public class GeoBoundaryService {
 
     private JsonNode fetchJson(String url) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder(URI.create(url))
+                .timeout(REQUEST_TIMEOUT)
                 .GET()
                 .header("Accept", "application/json")
                 .header("User-Agent", "BikeViewApp/1.0")
                 .build();
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<byte[]> response = httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
         if (response.statusCode() < 200 || response.statusCode() >= 300) {
             throw new IOException("Boundary request failed with status " + response.statusCode());
+        }
+        if (response.body().length > MAX_JSON_RESPONSE_BYTES) {
+            throw new IOException("Boundary response exceeded the allowed size.");
         }
         return objectMapper.readTree(response.body());
     }
