@@ -32,6 +32,11 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 
 public class DataHandler {
+    private static final String FIRESTORE_UNAVAILABLE_MESSAGE =
+            "Firestore unavailable. Using live Citi Bike feed when possible.";
+    private static final String FIRESTORE_CONNECTED_MESSAGE = "Connected to Firestore.";
+    private static final String LIVE_FEED_UNAVAILABLE_MESSAGE = "Live Citi Bike feed unavailable.";
+    private static final String RIDE_DATA_UNAVAILABLE_MESSAGE = "Ride data unavailable.";
     private static final List<Path> SERVICE_ACCOUNT_PATHS = List.of(
             Path.of("config", "firebase-service-account.json"),
             Path.of("config", "firebase_info", "bikeviewappKey.json"),
@@ -44,7 +49,8 @@ public class DataHandler {
     private final GeoBoundaryService geoBoundaryService = new GeoBoundaryService();
     private Firestore firestore;
     private String projectId = "Unavailable";
-    private String lastError = "Not connected";
+    private String lastError = FIRESTORE_UNAVAILABLE_MESSAGE;
+    private String lastDiagnosticError = "";
     private Instant lastSuccessfulRefresh;
     private boolean usingLiveFallback;
 
@@ -64,14 +70,16 @@ public class DataHandler {
         try {
             firestore.collection("app_metadata").document("status").get().get();
             lastError = "";
+            lastDiagnosticError = "";
             lastSuccessfulRefresh = Instant.now();
             return true;
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
             lastError = "Firestore connection check interrupted.";
+            lastDiagnosticError = "Firestore connection check interrupted.";
             return false;
         } catch (ExecutionException | RuntimeException exception) {
-            lastError = buildReadableError("Firestore connection failed.", exception);
+            recordFailure(FIRESTORE_UNAVAILABLE_MESSAGE, "Firestore connection failed.", exception);
             return false;
         }
     }
@@ -99,8 +107,9 @@ public class DataHandler {
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
             lastError = "Station load interrupted.";
+            lastDiagnosticError = "Station load interrupted.";
         } catch (ExecutionException | RuntimeException exception) {
-            lastError = buildReadableError("Unable to load stations from Firestore.", exception);
+            recordFailure(FIRESTORE_UNAVAILABLE_MESSAGE, "Unable to load stations from Firestore.", exception);
         }
         return loadStationsFromFallback();
     }
@@ -151,8 +160,9 @@ public class DataHandler {
         } catch (InterruptedException exception) {
             Thread.currentThread().interrupt();
             lastError = "Ride lookup interrupted.";
+            lastDiagnosticError = "Ride lookup interrupted.";
         } catch (ExecutionException | RuntimeException exception) {
-            lastError = buildReadableError("Unable to load rides from Firestore.", exception);
+            recordFailure(RIDE_DATA_UNAVAILABLE_MESSAGE, "Unable to load rides from Firestore.", exception);
         }
         return List.of();
     }
@@ -198,9 +208,9 @@ public class DataHandler {
             return "Using live Citi Bike feed because Firestore is unavailable.";
         }
         if (firestore != null && (lastError == null || lastError.isBlank())) {
-            return "Connected to Firestore.";
+            return FIRESTORE_CONNECTED_MESSAGE;
         }
-        return lastError == null || lastError.isBlank() ? "Firestore connection unavailable." : lastError;
+        return lastError == null || lastError.isBlank() ? "Firestore unavailable." : lastError;
     }
 
     public synchronized Firestore getFirestore() {
@@ -221,7 +231,8 @@ public class DataHandler {
     private Firestore initializeFirestore() {
         Path serviceAccountPath = resolveServiceAccountPath();
         if (serviceAccountPath == null) {
-            lastError = "Missing Firebase key. Checked: " + SERVICE_ACCOUNT_PATHS;
+            lastError = FIRESTORE_UNAVAILABLE_MESSAGE;
+            lastDiagnosticError = "Firebase service-account key is not configured for this local demo.";
             return null;
         }
         try (FileInputStream inputStream = new FileInputStream(serviceAccountPath.toFile())) {
@@ -241,7 +252,7 @@ public class DataHandler {
             }
             return FirestoreClient.getFirestore(firebaseApp);
         } catch (IOException | RuntimeException exception) {
-            lastError = buildReadableError("Unable to initialize Firebase.", exception);
+            recordFailure(FIRESTORE_UNAVAILABLE_MESSAGE, "Unable to initialize Firebase.", exception);
             return null;
         }
     }
@@ -401,6 +412,7 @@ public class DataHandler {
             if (exception instanceof InterruptedException) {
                 Thread.currentThread().interrupt();
             }
+            recordFailure(LIVE_FEED_UNAVAILABLE_MESSAGE, "Unable to load stations from live GBFS feed.", exception);
             return new ArrayList<>(cachedStations);
         }
     }
@@ -423,6 +435,11 @@ public class DataHandler {
             return prefix;
         }
         return prefix + " " + message;
+    }
+
+    private void recordFailure(String userMessage, String diagnosticPrefix, Exception exception) {
+        lastError = userMessage;
+        lastDiagnosticError = buildReadableError(diagnosticPrefix, exception);
     }
 }
 

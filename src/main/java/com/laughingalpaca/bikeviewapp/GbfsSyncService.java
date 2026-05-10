@@ -12,6 +12,7 @@ import java.net.http.HttpResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.laughingalpaca.bikeviewapp.Model.Station;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,27 +31,35 @@ public final class GbfsSyncService {
 
     public static final String STATION_INFORMATION_URL = "https://gbfs.lyft.com/gbfs/1.1/bkn/en/station_information.json";
     public static final String STATION_STATUS_URL = "https://gbfs.lyft.com/gbfs/1.1/bkn/en/station_status.json";
+    private static final Duration REQUEST_TIMEOUT = Duration.ofSeconds(10);
+    private static final int MAX_JSON_RESPONSE_BYTES = 10 * 1024 * 1024;
 
     private final HttpClient httpClient;
     private final ObjectMapper objectMapper;
     private final GeoBoundaryService geoBoundaryService;
 
     public GbfsSyncService() {
-        this.httpClient = HttpClient.newHttpClient();
+        this.httpClient = HttpClient.newBuilder()
+                .connectTimeout(REQUEST_TIMEOUT)
+                .build();
         this.objectMapper = new ObjectMapper();
         this.geoBoundaryService = new GeoBoundaryService();
     }
 
     private JsonNode fetchJson(String url) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder(URI.create(url))
+                .timeout(REQUEST_TIMEOUT)
                 .GET()
                 .header("Accept", "application/json")
                 .header("User-Agent", "BikeViewApp/1.0")
                 .build();
 
-        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<byte[]> response = httpClient.send(request, HttpResponse.BodyHandlers.ofByteArray());
         if (response.statusCode() < 200 || response.statusCode() >= 300) {
             throw new IOException("GBFS request failed with status " + response.statusCode() + " for " + url);
+        }
+        if (response.body().length > MAX_JSON_RESPONSE_BYTES) {
+            throw new IOException("GBFS response exceeded the allowed size.");
         }
         return objectMapper.readTree(response.body());
     }
