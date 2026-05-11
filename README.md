@@ -188,16 +188,3 @@ The project currently compiles successfully with:
 ```powershell
 .\mvnw.cmd -q clean -DskipTests compile
 ```
-
-At the time this README was prepared, the repo did not include a `src/test` directory. The main verification path is a clean Maven compile plus manual launch/demo testing of the JavaFX application.
-
-## Course Presentation Notes
-
-For a software engineering presentation, the clearest story is:
-
-1. The JavaFX UI gives users an interactive station map.
-2. `DataHandler` separates the UI from backend data details.
-3. Firestore is the preferred demo data source.
-4. GBFS fallback keeps the app functional when Firestore is unavailable.
-5. Census boundary data makes ZIP and borough filtering geographic instead of purely text-based.
-6. Current route and ride work should be described as future work, not completed trip analytics.
