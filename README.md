@@ -75,10 +75,6 @@ JavaFX controllers and map layers
 
 When Firestore credentials are not configured or Firestore is unavailable, `DataHandler` attempts to load station data directly from the live Citi Bike GBFS feed. This keeps the app useful for classroom demos even when the local database setup is incomplete.
 
-## Demo Walkthrough
-
-The following demo assets are intentionally kept in the README because they show the project manager's required visual flow.
-
 ### Launch
 
 The launcher introduces the application and shows the last available data update.
